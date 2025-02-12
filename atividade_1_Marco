@@ -1,0 +1,22 @@
+Create table Aluno (
+RA int primary key,
+Nome varchar(100) not null,
+Idade int not null,
+DataNasc date );
+
+
+Create table Professor (
+NFunc int primary key,
+Nome varchar(100) not null,
+Idade int not null,
+Titulacao varchar(100) not null;
+
+
+Create table Disciplina (
+Numero int,
+Sigla char(4),
+NAluno int not null,
+check (NAluno > 0),
+CONSTRAINT PKDisc PRIMARY KEY (Numero, Sigla)
+);
+
