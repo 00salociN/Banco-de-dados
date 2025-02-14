@@ -9,14 +9,34 @@ Create table Professor (
 NFunc int primary key,
 Nome varchar(100) not null,
 Idade int not null,
-Titulacao varchar(100) not null;
+Titulacao varchar(100) not null 
+);
 
 
-Create table Disciplina (
+Create table disciplina (
+Sigla char(4) Primary Key,
+Nome varchar(30) not nul,
+NCred int not null
+Livro varchar(100) not null
+CodProf int,
+unique (nome)
+);
+
+
+Create table Turma (
 Numero int,
 Sigla char(4),
 NAluno int not null,
 check (NAluno > 0),
 CONSTRAINT PKDisc PRIMARY KEY (Numero, Sigla)
+);
+
+Create table Matricula (
+Sigla char(4),
+Numero int,
+Aluno varchar(100),
+Ano int not null
+Nota int
+check (nota between 4 and 2)
 );
 
