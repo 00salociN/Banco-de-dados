@@ -1,1 +1,63 @@
+Create table Clientes (
+ID int autoincrement,
+Nome varchar(100) not null
+Email varchar(100) unique not null
+Telefone1 varchar(15) unique not null,
+Telefone2 varchar(15) unique,
+DataCadastro date not null,
+CONSTRAINT PKClientes PRIMARY KEY(ID)
+);
 
+
+Create table EnderecosClientes (
+ID int autoincrement,
+ClienteID int,
+SiglaEstado char(2) not null,
+Cidade varchar(100) not null
+NomeRua varchar(150) not null,
+NumeroRua int not null,
+CONSTRAINT PKEnderecosClientes PRIMARY KEY(ID),
+Constraint FKClientes Foreign key (ClienteID) References Clientes(ID)
+);
+
+
+Create table Fornecedores (
+ID int autoincrement,
+CNPJ varchar(15),
+Nome varchar(100) not null,
+EmailEmpresarial varchar(100) unique not null,
+Telefone1 varchar(15) unique not null,
+Telefone2 varchar(15) unique not null,
+Telefone3 varchar(15) unique not,
+CONSTRAINT PKFornecedores primary key(ID, CNPJ)
+);
+
+
+Create table EnderecosFornecedores (
+ID int autoincrement,
+FornecedorID int,
+SiglaEstado char(2) not null,
+Cidade varchar(100) not null
+NomeRua varchar(150) not null,
+NumeroRua int not null,
+CONSTRAINT PKEnderecosFornecedores PRIMARY KEY(ID),
+Constraint FKFornecedores Foreign key (FornecedorID) References Fornecedores(ID)
+);
+
+
+Create table Produtos (
+ID int autoincrement,
+CategoriaProduto enum('Gás', 'Água') not null,
+Nome varchar(100) not null,
+Descricao varchar(200) not null,
+Preco float(5, 2) not null,
+Estoque int not null
+FornecedorID int,
+CONSTRAINT PKProdutos PRIMARY KEY(ID),
+constraint FKFornecedores foreign key (FornecedorID) References Fornecedores(ID)
+);
+
+Create table Pedidos (
+ID int autoincrement,
+ClienteID
+Entregador
