@@ -95,7 +95,7 @@ constraint FKFornecedoresProdutos foreign key (FornecedorID) References Forneced
 
 Create table Pedidos (
 ID int auto_increment,
-ClienteID,
+ClienteID int,
 EntregadorID int,
 EnderecoID int,
 DatePedido datetime not null,
@@ -126,17 +126,17 @@ PedidoID int,
 DataPagamento datetime not null,
 ValorPagamento decimal(8,2) not null,
 MetodoPagamento varchar(50) not null,
-Constraint PKPagamentos primary key (ID),
-Constraint FKPedidosPagamentos foreing key (PedidoID) references Pedidos(ID)
+Constraint PKPagamentos primary key(ID),
+Constraint FKPedidosPagamentos foreign key (PedidoID) references Pedidos(ID)
 );
 
 
 Create table HistoricoEntregas (
 ID int auto_increment,
 PedidoID int,
-EntregadorID,
-Data datime not null,
+EntregadorID int,
+Data datetime not null,
 Constraint PKHistorico primary key (ID),
-Constraint FKPedidosHistorico foreing key (PedidoID) references Pedidos(ID),
+Constraint FKPedidosHistorico foreign key (PedidoID) references Pedidos(ID),
 Constraint FKEntregadoresHistorico foreign key (EntregadorID) references Entregadores(IDEntregador)
 );
