@@ -1,7 +1,42 @@
+Create table Funcionarios (
+ID int auto_increment,
+CPF varchar(15) not null unique,
+Nome varchar(50) not null,
+sobrenome varchar(50) not null,
+Setor varchar(50) not null,
+Email varchar(100) unique not null,
+Telefone1 varchar(15) unique not null,
+Telefone2 varchar(15) unique,
+DataContratacao date not null,
+Salario decimal(8, 2),
+CONSTRAINT PKFuncionarios PRIMARY KEY(ID)
+);
+
+
+Create table EnderecosFuncionarios (
+ID int auto_increment,
+FuncionarioID int,
+SiglaEstado char(2) not null,
+Cidade varchar(100) not null,
+NomeRua varchar(150) not null,
+NumeroRua int not null,
+CONSTRAINT PKEnderecosFuncionarios PRIMARY KEY(ID),
+Constraint FKEnderecosFuncionarios Foreign key (FuncionarioID) References Funcionarios(ID)
+);
+
+
+Create table Entregadores (
+IDEntregador int,
+CONSTRAINT PKEntregadores PRIMARY KEY(IDEntregador),
+Constraint FKEntregadores Foreign key (IDEntregador) References Funcionarios(ID)
+);
+
+
 Create table Clientes (
-ID int autoincrement,
-Nome varchar(100) not null
-Email varchar(100) unique not null
+ID int auto_increment,
+Nome varchar(50) not null,
+Sobrenome varchar(50) not null,
+Email varchar(100) unique not null,
 Telefone1 varchar(15) unique not null,
 Telefone2 varchar(15) unique,
 DataCadastro date not null,
@@ -10,54 +45,98 @@ CONSTRAINT PKClientes PRIMARY KEY(ID)
 
 
 Create table EnderecosClientes (
-ID int autoincrement,
+ID int auto_increment,
 ClienteID int,
 SiglaEstado char(2) not null,
-Cidade varchar(100) not null
+Cidade varchar(100) not null,
 NomeRua varchar(150) not null,
 NumeroRua int not null,
 CONSTRAINT PKEnderecosClientes PRIMARY KEY(ID),
-Constraint FKClientes Foreign key (ClienteID) References Clientes(ID)
+Constraint FKEnderecosClientes Foreign key (ClienteID) References Clientes(ID)
 );
 
 
 Create table Fornecedores (
-ID int autoincrement,
+ID int auto_increment,
 CNPJ varchar(15),
 Nome varchar(100) not null,
 EmailEmpresarial varchar(100) unique not null,
 Telefone1 varchar(15) unique not null,
 Telefone2 varchar(15) unique not null,
-Telefone3 varchar(15) unique not,
+Telefone3 varchar(15) unique,
 CONSTRAINT PKFornecedores primary key(ID, CNPJ)
 );
 
 
 Create table EnderecosFornecedores (
-ID int autoincrement,
+ID int auto_increment,
 FornecedorID int,
 SiglaEstado char(2) not null,
-Cidade varchar(100) not null
+Cidade varchar(100) not null,
 NomeRua varchar(150) not null,
 NumeroRua int not null,
 CONSTRAINT PKEnderecosFornecedores PRIMARY KEY(ID),
-Constraint FKFornecedores Foreign key (FornecedorID) References Fornecedores(ID)
+Constraint FKEnderecosFornecedores Foreign key (FornecedorID) References Fornecedores(ID)
 );
 
 
 Create table Produtos (
-ID int autoincrement,
+ID int auto_increment,
 CategoriaProduto enum('Gás', 'Água') not null,
 Nome varchar(100) not null,
 Descricao varchar(200) not null,
-Preco float(5, 2) not null,
-Estoque int not null
+PrecoUnitario decimal(5, 2) not null,
+Estoque int not null,
 FornecedorID int,
 CONSTRAINT PKProdutos PRIMARY KEY(ID),
-constraint FKFornecedores foreign key (FornecedorID) References Fornecedores(ID)
+constraint FKFornecedoresProdutos foreign key (FornecedorID) References Fornecedores(ID)
 );
 
+
 Create table Pedidos (
-ID int autoincrement,
-ClienteID
-Entregador
+ID int auto_increment,
+ClienteID,
+EntregadorID int,
+EnderecoID int,
+DatePedido datetime not null,
+DataEntrega datetime not null,
+Status ENUM('pendente', 'a caminho', 'cancelado', 'entregue') not null,
+CategoriaProduto enum('Gás', 'Água') not null,
+ValorTotal decimal(8, 2) not null,
+Constraint PKPedidos Primary key(ID),
+Constraint FKClientesPedidos foreign key (ClienteID) references Clientes(ID),
+Constraint FKEntregadoresPedidos foreign key (EntregadorID) references Entregadores(IDEntregador),
+Constraint FKEnderecosPedidos foreign key (EnderecoID) references EnderecosClientes(ID)
+);
+
+
+create table ComprasPedidos (
+PedidoID int,
+ProdutoID int,
+QuantidadeProduto int not null,
+CONSTRAINT PKPedidosProduto PRIMARY KEY(PedidoID, ProdutoID),
+Constraint FKPedidosCompras foreign key (PedidoID) references Pedidos(ID),
+Constraint FKProdutosCompras foreign key (ProdutoID) references Produtos(ID)
+);
+
+
+Create table Pagamentos (
+ID int,
+PedidoID int,
+DataPagamento datetime not null,
+ValorPagamento decimal(8,2) not null,
+MetodoPagamento varchar(50) not null,
+Constraint PKPagamentos primary key (ID),
+Constraint FKPedidosPagamentos foreing key (PedidoID) references Pedidos(ID)
+);
+
+
+Create table HistoricoEntregas (
+ID int auto_increment,
+PedidoID int,
+EntregadorID,
+Data datime not null,
+Constraint PKHistorico primary key (ID),
+Constraint FKPedidosHistorico foreing key (PedidoID) references Pedidos(ID),
+Constraint FKEntregadoresHistorico foreign key (EntregadorID) references Entregadores(IDEntregador)
+);
