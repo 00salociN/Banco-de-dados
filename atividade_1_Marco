@@ -1,25 +1,30 @@
 Create table Aluno (
-RA int primary key,
+RA int,
 Nome varchar(100) not null,
 Idade int not null,
-DataNasc date );
-
-
-Create table Professor (
-NFunc int primary key,
-Nome varchar(100) not null,
-Idade int not null,
-Titulacao varchar(100) not null 
+DataNasc date not null,
+constraint PKAluno primary key (RA)
 );
 
 
-Create table disciplina (
-Sigla char(4) Primary Key,
-Nome varchar(30) not nul,
-NCred int not null
-Livro varchar(100) not null
-CodProf int,
-unique (nome)
+Create table Professor (
+NFunc int,
+Nome varchar(100) not null,
+Idade int not null,
+Titulacao varchar(100) not null,
+constraint PKProfessor primary key (NFunc)
+);
+
+
+Create table Disciplina (
+Sigla char(4),
+Nome varchar(30) not null,
+NCred int not null,
+Livro varchar(100) not null,
+Professor int,
+unique (nome),
+constraint PKDisciplina primary key (Sigla),
+constraint FKProfessor Foreign key (Professor) references Professor (NFunc)
 );
 
 
@@ -27,16 +32,19 @@ Create table Turma (
 Numero int,
 Sigla char(4),
 NAluno int not null,
-check (NAluno > 0),
-CONSTRAINT PKDisc PRIMARY KEY (Numero, Sigla)
+check (NAluno >= 0 and NAluno <= 40),
+CONSTRAINT PKDisc PRIMARY KEY (Numero, Sigla),
+constraint FKSigla Foreign key (Sigla) references Disciplina (Sigla)
 );
 
 Create table Matricula (
 Sigla char(4),
 Numero int,
-Aluno varchar(100),
-Ano int not null
-Nota int
-check (nota between 4 and 2)
+Aluno int,
+Ano int,
+Nota decimal(4,2) check (Nota >=0 and Nota <= 10) not null,
+constraint PKMatricula primary key (Sigla, Numero, Aluno, Ano),
+constraint FKSiglaMatricula Foreign key (Sigla) references Turma (Sigla),
+constraint FKAluno Foreign key (Aluno) references Aluno (RA)
 );
 
