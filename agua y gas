@@ -39,7 +39,7 @@ Sobrenome varchar(50) not null,
 Email varchar(100) unique not null,
 Telefone1 varchar(15) unique not null,
 Telefone2 varchar(15) unique,
-DataCadastro date not null,
+DataCadastro datetime not null defaultnow(),
 CONSTRAINT PKClientes PRIMARY KEY(ID)
 );
 
@@ -98,8 +98,8 @@ ID int auto_increment,
 ClienteID int,
 EntregadorID int,
 EnderecoID int,
-DatePedido datetime not null,
-DataEntrega datetime not null,
+DataPedido datetime not null default now(),
+DataEntrega datetime,
 Status ENUM('pendente', 'a caminho', 'cancelado', 'entregue') not null,
 CategoriaProduto enum('Gás', 'Água') not null,
 ValorTotal decimal(8, 2) not null,
@@ -123,7 +123,7 @@ Constraint FKProdutosCompras foreign key (ProdutoID) references Produtos(ID)
 Create table Pagamentos (
 ID int,
 PedidoID int,
-DataPagamento datetime not null,
+DataPagamento datetime default now(),
 ValorPagamento decimal(8,2) not null,
 MetodoPagamento varchar(50) not null,
 Constraint PKPagamentos primary key(ID),
