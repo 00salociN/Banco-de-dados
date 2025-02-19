@@ -39,7 +39,7 @@ Sobrenome varchar(50) not null,
 Email varchar(100) unique not null,
 Telefone1 varchar(15) unique not null,
 Telefone2 varchar(15) unique,
-DataCadastro datetime not null defaultnow(),
+DataCadastro datetime not null default now(),
 CONSTRAINT PKClientes PRIMARY KEY(ID)
 );
 
