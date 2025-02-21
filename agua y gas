@@ -140,3 +140,43 @@ Constraint PKHistorico primary key (ID),
 Constraint FKPedidosHistorico foreign key (PedidoID) references Pedidos(ID),
 Constraint FKEntregadoresHistorico foreign key (EntregadorID) references Entregadores(IDEntregador)
 );
+
+
+
+
+
+
+-------------------------------------------------------- 
+
+CREATE TRIGGER after_insert_compras_pedidos
+AFTER INSERT ON ComprasPedidos
+FOR EACH ROW
+BEGIN
+    UPDATE Produtos
+    SET Estoque = Estoque - NEW.QuantidadeProduto
+    WHERE ID = NEW.ProdutoID;
+    
+    IF (SELECT Estoque FROM Produtos WHERE ID = NEW.ProdutoID) < 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Quantidade de estoque não pode ser menor que zero';
+    END IF;
+END;
+
+--------------------------------------------------------
+
+CREATE TRIGGER after_update_pedidos
+AFTER UPDATE ON Pedidos
+FOR EACH ROW
+BEGIN
+    -- Exemplo: Se o pedido foi entregue, atualize o status para 'entregue'
+    IF NEW.Status = 'entregue' THEN
+        INSERT INTO HistoricoEntregas (PedidoID, EntregadorID, Data)
+        VALUES (NEW.ID, NEW.EntregadorID, NOW());
+    END IF;
+
+    -- Adicione outras condições conforme necessário
+    -- Exemplo: Se o pedido foi cancelado, atualize o status para 'cancelado'
+    IF NEW.Status = 'cancelado' THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'O pedido foi cancelado';
+    END IF;
+END;
+
