@@ -50,7 +50,6 @@ ALTER TABLE EstoqueMaterial DROP PRIMARY KEY;
                                 // REMOVENDO AS COLUNAS
 ALTER TABLE Fornecedores DROP ContatoComercial;
 
-
 ALTER TABLE EstoqueMaterial DROP PontoReposicao;
 
                                 // ALTERANDO AS COLUNAS
