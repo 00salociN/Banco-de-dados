@@ -1,0 +1,40 @@
+CREATE TABLE IF NOT EXISTS Fornecedores (
+ID BIGINT,
+RazaoSocial VARCHAR(500),
+CNPJ VARCHAR(30),
+IE VARCHAR(30),
+Email VARCHAR(30),
+Site VARCHAR(30),
+Fone VARCHAR(9),
+Fax VARCHAR(9),
+ContatoComercial VARCHAR(20),
+CONSTRAINT PKFornecedores PRIMARY KEY(ID)
+);
+
+CREATE TABLE IF NOT EXISTS TipoMateria(
+ID BIGINT,
+Descricao VARCHAR(200),
+CONSTRAINT PKTipoMateria PRIMARY KEY(ID)
+);
+
+CREATE TABLE IF NOT EXISTS MateriaPrima (
+ID BIGINT,
+TipoMateriaID BIGINT,
+FornecedoresID BIGINT,
+NomeMateria VARCHAR(200),
+Valor BIGINT,
+Unidade VARCHAR(5),
+Descricao VARCHAR(300),
+CONSTRAINT PKMateriaPrima PRIMARY KEY(ID),
+CONSTRAINT FKTipoMateria FOREIGN KEY (TipoMateriaID) REFERENCES TipoMateria(ID),
+CONSTRAINT FKFornecedores FOREIGN KEY (FornecedoresID) REFERENCES Fornecedores(ID)
+);
+
+CREATE TABLE IF NOT EXISTS EstoqueMaterial (
+ID BIGINT,
+MateriaPrimaID BIGINT,
+Quantidade DOUBLE,
+PontoReposicao DOUBLE,
+CONSTRAINT PKEstoqueMaterial PRIMARY KEY(ID),
+CONSTRAINT FKMateriaPrima FOREIGN KEY (MateriaPrimaID) REFERENCES MateriaPrima(ID)
+);
