@@ -38,3 +38,7 @@ PontoReposicao DOUBLE,
 CONSTRAINT PKEstoqueMaterial PRIMARY KEY(ID),
 CONSTRAINT FKMateriaPrima FOREIGN KEY (MateriaPrimaID) REFERENCES MateriaPrima(ID)
 );
+
+
+-------------------------------------------------------------------------------------------
+                                      ALTERAÇÕES 
