@@ -17,10 +17,10 @@ constraint PKProfessor primary key (NFunc)
 
 
 Create table Disciplina (
-Sigla char(4),
-Nome varchar(30) not null,
+Sigla char(6),
+Nome varchar(100) not null,
 NCred int not null,
-Livro varchar(100) not null,
+Livro varchar(150) not null,
 Professor int,
 unique (nome),
 constraint PKDisciplina primary key (Sigla),
@@ -30,15 +30,15 @@ constraint FKProfessor Foreign key (Professor) references Professor (NFunc)
 
 Create table Turma (
 Numero int,
-Sigla char(4),
+Sigla char(6),
 NAluno int not null,
-check (NAluno >= 0 and NAluno <= 40),
+check (NAluno >= 1 and NAluno <= 40),
 CONSTRAINT PKDisc PRIMARY KEY (Numero, Sigla),
 constraint FKSigla Foreign key (Sigla) references Disciplina (Sigla)
 );
 
 Create table Matricula (
-Sigla char(4),
+Sigla char(6),
 Numero int,
 Aluno int,
 Ano int,
