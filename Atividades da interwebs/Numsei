@@ -1,0 +1,144 @@
+Certo! Vamos agora para um exercício de criação de tabelas extremamente avançado, com conceitos de normalização em várias formas, relacionamentos complexos, tipos de dados especializados, validações e restrições avançadas, entre outros. Esse exercício é ideal para um nível de banco de dados profissional, que abrange a arquitetura de um sistema de grande porte, como um sistema de gerenciamento de recursos empresariais (ERP).
+
+### **Exercício Avançado: Sistema de Gestão de Recursos Empresariais (ERP)**
+
+#### Cenário:
+Você vai criar um banco de dados para um sistema ERP que gerencia vários aspectos de uma empresa, incluindo **clientes**, **fornecedores**, **estoques**, **vendas**, **compras**, **funcionários**, **departamentos**, **produtos**, **transações financeiras** e **relatórios de desempenho**.
+
+As tabelas devem ser projetadas para lidar com dados complexos, alta performance e garantir a integridade referencial. As relações entre as tabelas devem ser muitas-para-muitas e um-para-muitos.
+
+### 1. **Tabelas para Gerenciamento de Funcionários e Departamentos**
+
+#### Tabela `funcionarios`
+- `id_funcionario` (chave primária, inteiro, autoincremento)
+- `nome` (texto, tamanho máximo de 200 caracteres, `NOT NULL`)
+- `cpf` (texto, tamanho máximo de 14 caracteres, único, `NOT NULL`)
+- `email` (texto, tamanho máximo de 255 caracteres, único, `NOT NULL`)
+- `data_nascimento` (data)
+- `telefone` (texto, tamanho máximo de 15 caracteres, `NULL` permitido)
+- `endereco` (texto, tamanho máximo de 255 caracteres, `NULL` permitido)
+- `data_admissao` (data, `NOT NULL`)
+- `data_demissao` (data, `NULL` permitido)
+- `salario` (decimal, 2 casas decimais, maior que 0)
+- `status` (enum, valores: 'ativo', 'inativo', 'licença', valor padrão: 'ativo')
+- `id_departamento` (inteiro, chave estrangeira referenciando `id_departamento` da tabela `departamentos`)
+- `cargo` (texto, tamanho máximo de 100 caracteres, `NOT NULL`)
+
+#### Tabela `departamentos`
+- `id_departamento` (chave primária, inteiro, autoincremento)
+- `nome_departamento` (texto, tamanho máximo de 100 caracteres, `NOT NULL`)
+- `localizacao` (texto, tamanho máximo de 200 caracteres)
+- `orcamento` (decimal, 2 casas decimais, maior que 0)
+- `gerente_id` (inteiro, chave estrangeira referenciando `id_funcionario` da tabela `funcionarios`)
+
+#### Tabela `historico_salarios`
+- `id_historico` (chave primária, inteiro, autoincremento)
+- `id_funcionario` (inteiro, chave estrangeira referenciando `id_funcionario` da tabela `funcionarios`)
+- `salario` (decimal, 2 casas decimais, maior que 0)
+- `data_inicio` (data, `NOT NULL`)
+- `data_fim` (data, `NULL` permitido)
+- **Restrição**: A data de término deve ser maior ou igual à data de início.
+
+---
+
+### 2. **Tabelas para Gerenciamento de Clientes e Fornecedores**
+
+#### Tabela `clientes`
+- `id_cliente` (chave primária, inteiro, autoincremento)
+- `nome_cliente` (texto, tamanho máximo de 200 caracteres, `NOT NULL`)
+- `cpf_cnpj` (texto, tamanho máximo de 18 caracteres, único, `NOT NULL`)
+- `email` (texto, tamanho máximo de 255 caracteres, único, `NOT NULL`)
+- `telefone` (texto, tamanho máximo de 15 caracteres, `NULL` permitido)
+- `endereco` (texto, tamanho máximo de 255 caracteres)
+- `status_cliente` (enum, valores: 'ativo', 'inativo', 'bloqueado', valor padrão: 'ativo')
+
+#### Tabela `fornecedores`
+- `id_fornecedor` (chave primária, inteiro, autoincremento)
+- `nome_fornecedor` (texto, tamanho máximo de 200 caracteres, `NOT NULL`)
+- `cnpj` (texto, tamanho máximo de 18 caracteres, único, `NOT NULL`)
+- `email` (texto, tamanho máximo de 255 caracteres, único, `NOT NULL`)
+- `telefone` (texto, tamanho máximo de 15 caracteres, `NULL` permitido)
+- `endereco` (texto, tamanho máximo de 255 caracteres)
+- `status_fornecedor` (enum, valores: 'ativo', 'inativo', 'bloqueado', valor padrão: 'ativo')
+
+---
+
+### 3. **Tabelas para Gerenciamento de Estoque e Produtos**
+
+#### Tabela `produtos`
+- `id_produto` (chave primária, inteiro, autoincremento)
+- `nome_produto` (texto, tamanho máximo de 200 caracteres, `NOT NULL`)
+- `descricao_produto` (texto, tamanho máximo de 500 caracteres, `NULL` permitido)
+- `preco` (decimal, 2 casas decimais, maior que 0)
+- `quantidade_estoque` (inteiro, maior ou igual a 0, `NOT NULL`)
+- `status_produto` (enum, valores: 'disponível', 'indisponível', valor padrão: 'disponível')
+- `id_categoria` (inteiro, chave estrangeira referenciando `id_categoria` da tabela `categorias_produtos`)
+
+#### Tabela `categorias_produtos`
+- `id_categoria` (chave primária, inteiro, autoincremento)
+- `nome_categoria` (texto, tamanho máximo de 100 caracteres, `NOT NULL`)
+- `descricao_categoria` (texto, tamanho máximo de 500 caracteres, `NULL` permitido)
+
+---
+
+### 4. **Tabelas para Gerenciamento de Transações de Compras e Vendas**
+
+#### Tabela `compras`
+- `id_compra` (chave primária, inteiro, autoincremento)
+- `id_fornecedor` (inteiro, chave estrangeira referenciando `id_fornecedor` da tabela `fornecedores`)
+- `data_compra` (data e hora, `NOT NULL`)
+- `valor_total` (decimal, 2 casas decimais, maior que 0)
+- `status_compra` (enum, valores: 'pendente', 'concluída', 'cancelada', valor padrão: 'pendente')
+
+#### Tabela `itens_compra`
+- `id_item_compra` (chave primária, inteiro, autoincremento)
+- `id_compra` (inteiro, chave estrangeira referenciando `id_compra` da tabela `compras`)
+- `id_produto` (inteiro, chave estrangeira referenciando `id_produto` da tabela `produtos`)
+- `quantidade` (inteiro, maior que 0)
+- `preco_unitario` (decimal, 2 casas decimais, maior que 0)
+
+#### Tabela `vendas`
+- `id_venda` (chave primária, inteiro, autoincremento)
+- `id_cliente` (inteiro, chave estrangeira referenciando `id_cliente` da tabela `clientes`)
+- `data_venda` (data e hora, `NOT NULL`)
+- `valor_total` (decimal, 2 casas decimais, maior que 0)
+- `status_venda` (enum, valores: 'pendente', 'concluída', 'cancelada', valor padrão: 'pendente')
+
+#### Tabela `itens_venda`
+- `id_item_venda` (chave primária, inteiro, autoincremento)
+- `id_venda` (inteiro, chave estrangeira referenciando `id_venda` da tabela `vendas`)
+- `id_produto` (inteiro, chave estrangeira referenciando `id_produto` da tabela `produtos`)
+- `quantidade` (inteiro, maior que 0)
+- `preco_unitario` (decimal, 2 casas decimais, maior que 0)
+
+---
+
+### 5. **Tabelas para Gerenciamento de Finanças e Relatórios**
+
+#### Tabela `transacoes_financeiras`
+- `id_transacao` (chave primária, inteiro, autoincremento)
+- `id_funcionario` (inteiro, chave estrangeira referenciando `id_funcionario` da tabela `funcionarios`)
+- `id_cliente` (inteiro, chave estrangeira referenciando `id_cliente` da tabela `clientes`, `NULL` permitido)
+- `id_fornecedor` (inteiro, chave estrangeira referenciando `id_fornecedor` da tabela `fornecedores`, `NULL` permitido)
+- `tipo_transacao` (enum, valores: 'compra', 'venda', 'pagamento', 'recebimento', `NOT NULL`)
+- `valor` (decimal, 2 casas decimais, maior que 0)
+- `data_transacao` (data e hora, `NOT NULL`)
+- `descricao` (texto, tamanho máximo de 500 caracteres)
+
+#### Tabela `relatorios_de_desempenho`
+- `id_relatorio` (chave primária, inteiro, autoincremento)
+- `id_funcionario` (inteiro, chave estrangeira referenciando `id_funcionario` da tabela `funcionarios`)
+- `ano` (inteiro, `NOT NULL`)
+- `mes` (inteiro, `NOT NULL`, entre 1 e 12)
+- `desempenho` (decimal, 2 casas decimais, entre 0 e 10)
+- `comentarios` (texto, tamanho máximo de 1000 caracteres, `NULL` permitido)
+
+---
+
+### **Desafios e Considerações**
+- **Normalização**: O banco está normalizado até a 3NF (Terceira Forma Normal), eliminando redundâncias e garantindo integridade.
+- **Relacionamentos complexos**: Há vários relacionamentos muitos-para-muitos (como entre clientes e fornecedores, compras e produtos) e um-para-muitos (funcionários e departamentos, vendas e itens de venda).
+- **Tipos de dados avançados**: O uso de `enum` para status de transações, vendas e compras garante que apenas valores válidos sejam armazenados. Os campos monetários são do tipo `decimal` para precisão.
+- **Restrição de integridade**: A integridade dos dados é garantida através de chaves estrangeiras, tipos de dados apropriados e restrições como `CHECK` para valores dentro de intervalos (por exemplo, salários positivos, quantidades de estoque não negativas).
+
+Esse modelo de banco de dados é altamente complexo e robusto, projetado para lidar com as necessidades de um grande sistema ERP de uma empresa. Ele envolve conceitos avançados de modelagem de dados, otimização de performance e garantir integridade, além de atender a uma ampla gama de necessidades comerciais.
