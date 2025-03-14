@@ -142,3 +142,13 @@ As tabelas devem ser projetadas para lidar com dados complexos, alta performance
 - **Restrição de integridade**: A integridade dos dados é garantida através de chaves estrangeiras, tipos de dados apropriados e restrições como `CHECK` para valores dentro de intervalos (por exemplo, salários positivos, quantidades de estoque não negativas).
 
 Esse modelo de banco de dados é altamente complexo e robusto, projetado para lidar com as necessidades de um grande sistema ERP de uma empresa. Ele envolve conceitos avançados de modelagem de dados, otimização de performance e garantir integridade, além de atender a uma ampla gama de necessidades comerciais.
+
+
+
+Create table Funcionarios
+ID int auto_increment,
+CPF int,
+Nome varchar(200) not null,
+Email varchar(200) not null,
+DataNascimento date not null,
+telefone varchar(15)
