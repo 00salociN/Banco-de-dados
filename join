@@ -1,0 +1,205 @@
+Create table Aluno (
+RA int,
+Nome varchar(100) not null,
+Idade int not null,
+DataNasc date not null,
+constraint PKAluno primary key (RA)
+);
+
+
+
+
+ Create table Professor (
+NFunc int,
+Nome varchar(100) not null,
+Idade int not null,
+Titulacao varchar(100) not null,
+constraint PKProfessor primary key (NFunc)
+);
+
+
+
+
+ Create table Disciplina (
+Sigla char(6),
+Nome varchar(100) not null,
+NCred int not null,
+Livro varchar(150) not null,
+Professor int,
+unique (nome),
+constraint PKDisciplina primary key (Sigla),
+constraint FKProfessor Foreign key (Professor) references Professor (NFunc)
+);
+
+
+
+
+ Create table Turma (
+Numero int,
+Sigla char(6),
+NAluno int not null,
+check (NAluno >= 1 and NAluno <= 40),
+CONSTRAINT PKDisc PRIMARY KEY (Numero, Sigla),
+constraint FKSigla Foreign key (Sigla) references Disciplina (Sigla)
+);
+
+
+
+ Create table Matricula (
+Sigla char(6),
+Numero int,
+Aluno int,
+Ano int,
+Nota decimal(4,2) check (Nota >=0 and Nota <= 10) not null,
+constraint PKMatricula primary key (Sigla, Numero, Aluno, Ano),
+constraint FKSiglaMatricula Foreign key (Sigla) references Turma (Sigla),
+constraint FKAluno Foreign key (Aluno) references Aluno (RA)
+);
+
+------------------------------------------------------------------------------------------
+                                        Dados
+------------------------------------------------------------------------------------------
+
+ insert into Aluno (RA, Nome, Idade, DataNasc) Values
+(22, "Zezinho", 20, "2005-01-01"),
+(13, "Lagarto", 19, "2024-09-09"),
+(99, "Henrique", 20, "2005-03-03"),
+(369,"Nicolas", 20, "2005-01-01"),
+(100,"Pedro", 19, "2004-08-08");
+
+insert into Professor (NFunc, Nome, Idade, Titulacao) Values
+(9, "Arnaldo", 20, "Doutorado"),
+(10, "Marco", 19, "Doutorado"),
+(11, "Nicolas", 21, "Doutor"),
+(12, "Pedro", 19, "Bobo");
+Query OK, 4 rows affected (0.00 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+
+insert into Disciplina (Sigla, Nome, NCred, Livro, Professor) Values
+("BD-II", "Banco de Dados - II", 5, "Banco de dados: A Origem", 9),
+("PW-II", "Programação Web - II", 10, "Quem inventou a merda do PHP?", 9),
+("LP-II", "Lógica de Programação - II", 5, "Portugol, o terror dos terrores", 10);
+Query OK, 3 rows affected (0.00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+
+insert into turma (Numero, Sigla, NAluno) values
+(1, "BD-II", 40),
+(2, "PW-II", 35);
+Query OK, 2 rows affected (0.00 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+
+insert into Matricula (Sigla, Numero, Aluno, Ano, Nota) Values
+("PW-II", 2, 22, 2025, 8.50),
+("PW-II", 2, 13, 2025, 9.00),
+("BD-II", 1, 22, 2025, 9.00),
+("BD-II", 1, 13, 2025, 10.00),
+("BD-II", 1, 369, 2025, 10.00);
+Query OK, 5 rows affected (0.00 sec)
+
+
+
+------------------------------------------------------------------------------------------
+                                            Join
+------------------------------------------------------------------------------------------
+
+select e.RA, e.Nome, p.NFunc, p.nome from aluno as e inner join professor as p on e.nome = p.nome;
++-----+---------+-------+---------+
+| RA  | Nome    | NFunc | nome    |
++-----+---------+-------+---------+
+| 100 | Pedro   |    12 | Pedro   |
+| 369 | Nicolas |    11 | Nicolas |
++-----+---------+-------+---------+
+
+select e.nome, p.nome from aluno as e left join professor as p on e.nome = p.nome;
++----------+---------+
+| nome     | nome    |
++----------+---------+
+| Lagarto  | NULL    |
+| Zezinho  | NULL    |
+| Henrique | NULL    |
+| Pedro    | Pedro   |
+| Nicolas  | Nicolas |
++----------+---------+
+
+select e.nome, p.nome from aluno as e left join professor as p on e.nome = p.nome where p.nome is null;
++----------+------+
+| nome     | nome |
++----------+------+
+| Lagarto  | NULL |
+| Zezinho  | NULL |
+| Henrique | NULL |
++----------+------+
+
+select e.nome, p.nome from aluno as e right join professor as p on e.nome = p.nome;
++---------+---------+
+| nome    | nome    |
++---------+---------+
+| NULL    | Arnaldo |
+| NULL    | Marco   |
+| Nicolas | Nicolas |
+| Pedro   | Pedro   |
++---------+---------+
+
+select e.nome, p.nome from aluno as e right join professor as p on e.nome = p.nome where e.nome is null;
++------+---------+
+| nome | nome    |
++------+---------+
+| NULL | Arnaldo |
+| NULL | Marco   |
++------+---------+
+
+SELECT e.nome, p.nome
+FROM aluno AS e
+LEFT JOIN professor AS p ON e.nome = p.nome
+UNION
+SELECT e.nome, p.nome
+FROM aluno AS e
+RIGHT JOIN professor AS p ON e.nome = p.nome;
++----------+---------+
+| nome     | nome    |
++----------+---------+
+| Lagarto  | NULL    |
+| Zezinho  | NULL    |
+| Henrique | NULL    |
+| Pedro    | Pedro   |
+| Nicolas  | Nicolas |
+| NULL     | Arnaldo |
+| NULL     | Marco   |
++----------+---------+
+
+SELECT e.nome, p.nome
+FROM aluno AS e
+LEFT JOIN professor AS p ON e.nome = p.nome
+UNION
+SELECT e.nome, p.nome
+FROM aluno AS e
+RIGHT JOIN professor AS p ON e.nome = p.nome
+where e.nome is null or p.nome is null;
++----------+---------+
+| nome     | nome    |
++----------+---------+
+| Lagarto  | NULL    |
+| Zezinho  | NULL    |
+| Henrique | NULL    |
+| Pedro    | Pedro   |
+| Nicolas  | Nicolas |
+| NULL     | Arnaldo |
+| NULL     | Marco   |
++----------+---------+
+
+select e.idade, e.nome, p.idade, p.nome from aluno as e cross join professor as p where e.ra = 369 or p.nfunc = 9;
++-------+----------+-------+---------+
+| idade | nome     | idade | nome    |
++-------+----------+-------+---------+
+|    19 | Lagarto  |    20 | Arnaldo |
+|    20 | Zezinho  |    20 | Arnaldo |
+|    20 | Henrique |    20 | Arnaldo |
+|    19 | Pedro    |    20 | Arnaldo |
+|    20 | Nicolas  |    19 | Pedro   |
+|    20 | Nicolas  |    21 | Nicolas |
+|    20 | Nicolas  |    19 | Marco   |
+|    20 | Nicolas  |    20 | Arnaldo |
++-------+----------+-------+---------+
