@@ -1,0 +1,102 @@
+CREATE DATABASE IF NOT EXISTS BD_Distribuidora;
+USE BD_Distribuidora;
+
+
+CREATE TABLE IF NOT EXISTS Tipo (
+    codigo INT PRIMARY KEY,
+    nome_do_tipo VARCHAR(50) NOT NULL
+);
+
+
+CREATE TABLE IF NOT EXISTS Fornecedores (
+    codigo VARCHAR(10) PRIMARY KEY,
+    cnpj VARCHAR(18) NOT NULL,
+    nome_empresa VARCHAR(100) NOT NULL,
+    endereco VARCHAR(200) NOT NULL,
+    telefone VARCHAR(20) NOT NULL,
+    email VARCHAR(100) NOT NULL
+);
+
+
+CREATE TABLE IF NOT EXISTS Produtos (
+    codigo_produto VARCHAR(10) PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    descricao TEXT,
+    quantidade_estoque INT NOT NULL,
+    valor_compra DECIMAL(10,2) NOT NULL,
+    valor_venda DECIMAL(10,2) NOT NULL,
+    codigo_tipo INT NOT NULL,
+    embalagem VARCHAR(50) NOT NULL,
+    unidade_medida VARCHAR(20) NOT NULL,
+    volume VARCHAR(20) NOT NULL,
+    codigo_fornecedor VARCHAR(10) NOT NULL,
+    FOREIGN KEY (codigo_tipo) REFERENCES Tipo(codigo),
+    FOREIGN KEY (codigo_fornecedor) REFERENCES Fornecedores(codigo)
+);
+
+
+CREATE TABLE IF NOT EXISTS FormaPagamento (
+    codigo INT PRIMARY KEY,
+    forma_pagamento VARCHAR(50) NOT NULL
+);
+
+
+CREATE TABLE IF NOT EXISTS Clientes (
+    codigo VARCHAR(10) PRIMARY KEY,
+    cpf VARCHAR(14) NOT NULL,
+    nome VARCHAR(100) NOT NULL,
+    endereco VARCHAR(200) NOT NULL,
+    telefone VARCHAR(20) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    data_nascimento DATE NOT NULL
+);
+
+
+CREATE TABLE IF NOT EXISTS Funcionarios (
+    codigo VARCHAR(10) PRIMARY KEY,
+    cpf VARCHAR(14) NOT NULL,
+    nome VARCHAR(100) NOT NULL,
+    endereco VARCHAR(200) NOT NULL,
+    data_nascimento DATE NOT NULL,
+    sexo VARCHAR(20) NOT NULL,
+    telefone VARCHAR(20) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    tipo_sanguineo VARCHAR(5) NOT NULL,
+    diabetes VARCHAR(5) NOT NULL
+);
+
+
+CREATE TABLE IF NOT EXISTS Entregadores (
+    codigo VARCHAR(10) PRIMARY KEY,
+    cpf VARCHAR(14) NOT NULL,
+    nome VARCHAR(100) NOT NULL,
+    endereco VARCHAR(200) NOT NULL,
+    telefone VARCHAR(20) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    tipo_veiculo VARCHAR(50) NOT NULL,
+    placa VARCHAR(10) NOT NULL,
+    chassi VARCHAR(20) NOT NULL,
+    marca VARCHAR(50) NOT NULL,
+    modelo VARCHAR(50) NOT NULL,
+    ano INT NOT NULL
+);
+
+
+CREATE TABLE IF NOT EXISTS Vendas (
+    codigo_venda INT PRIMARY KEY,
+    data_venda DATE NOT NULL,
+    codigo_cliente VARCHAR(10) NOT NULL,
+    codigo_produto VARCHAR(10) NOT NULL,
+    qtd_vendida DECIMAL(10,2) NOT NULL,
+    forma_pagamento INT NOT NULL,
+    valor_unitario DECIMAL(10,2) NOT NULL,
+    valor_total DECIMAL(10,2) NOT NULL,
+    entregador VARCHAR(10) NOT NULL,
+    FOREIGN KEY (codigo_cliente) REFERENCES Clientes(codigo),
+    FOREIGN KEY (codigo_produto) REFERENCES Produtos(codigo_produto),
+    FOREIGN KEY (forma_pagamento) REFERENCES FormaPagamento(codigo),
+    FOREIGN KEY (entregador) REFERENCES Entregadores(codigo)
+);
+
+
+
