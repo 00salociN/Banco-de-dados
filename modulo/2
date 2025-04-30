@@ -33,3 +33,16 @@ INSERT INTO Vendas (IDVenda, ClienteID, LivroID, DataVenda, Quantidade) VALUES
 (8, 3, 6, '2025-04-08', 2),
 (9, 4, 5, '2025-04-09', 1),
 (10, 2, 1, '2025-04-10', 1);
+
+
+
+
+
+
+
+    UPDATES
+
+update livros set preco = 9.99 where livroid = 3;
+
+  Drop
+delete from clientes where IDCliente = 5;
