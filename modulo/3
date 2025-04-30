@@ -1,0 +1,7 @@
+select * from livros where AnoPublicacao = 2015;
+
+select * from autores where nacionalidade = "brasileiro";
+
+select * from clientes where cidade like "s%";
+
+select * from livros where preco between 30 and 50;
