@@ -1,1 +1,35 @@
+INSERT INTO Autores (IDAutor, Nome, Nacionalidade) VALUES 
+(1, 'J.K. Rowling', 'Britânica'),
+(2, 'George R.R. Martin', 'Americano'),
+(3, 'J.R.R. Tolkien', 'Britânico'),
+(4, 'Agatha Christie', 'Britânica'),
+(5, 'Gabriel Garcia Marquez', 'Colombiano');
 
+INSERT INTO Livros (IDLivro, Titulo, AnoPublicacao, AutorID, Preco) VALUES 
+(1, 'Harry Potter e a Pedra Filosofal', 1997, 1, 39.90),
+(2, 'Harry Potter e a Câmara Secreta', 1998, 1, 42.90),
+(3, 'A Guerra dos Tronos', 1996, 2, 59.90),
+(4, 'O Festim dos Corvos', 2005, 2, 49.90),
+(5, 'O Senhor dos Anéis: A Sociedade do Anel', 1954, 3, 69.90),
+(6, 'O Senhor dos Anéis: As Duas Torres', 1954, 3, 69.90),
+(7, 'Assassinato no Expresso do Oriente', 1934, 4, 29.90),
+(8, 'Cem Anos de Solidão', 1967, 5, 39.90);
+
+INSERT INTO Clientes (IDCliente, Nome, Email, Cidade) VALUES 
+(1, 'Carlos Silva', 'carlos.silva@email.com', 'São Paulo'),
+(2, 'Ana Oliveira', 'ana.oliveira@email.com', 'Rio de Janeiro'),
+(3, 'Marcos Pereira', 'marcos.pereira@email.com', 'Belo Horizonte'),
+(4, 'Juliana Souza', 'juliana.souza@email.com', 'Curitiba'),
+(5, 'Fernanda Lima', 'fernanda.lima@email.com', 'Porto Alegre');
+
+INSERT INTO Vendas (IDVenda, ClienteID, LivroID, DataVenda, Quantidade) VALUES 
+(1, 1, 1, '2025-04-01', 1),
+(2, 2, 3, '2025-04-02', 2),
+(3, 3, 5, '2025-04-03', 1),
+(4, 4, 7, '2025-04-04', 1),
+(5, 5, 8, '2025-04-05', 1),
+(6, 1, 2, '2025-04-06', 1),
+(7, 2, 4, '2025-04-07', 1),
+(8, 3, 6, '2025-04-08', 2),
+(9, 4, 5, '2025-04-09', 1),
+(10, 5, 1, '2025-04-10', 1);
