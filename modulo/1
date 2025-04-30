@@ -1,1 +1,35 @@
+create table Autores (
+IDAutor int,
+Nome varchar(150) not null,
+nacionalidade varchar(150),
+constraint PKAutor primary key (IDAutor)
+);
 
+create table Livros (
+IDLivro int,
+Titulo varchar(150) not null,
+AnoPublicacao int not null,
+AutorID int,
+preco float not null,
+contraint PKTitulo primary key (IDLivro),
+contraint FKAutorLivro foreign key (AutorID) references Autores (IDAutor)
+);
+
+create table Clientes (
+IDCliente int,
+Nome varchar(150) not null,
+Email varchar(150) not null,
+Cidade varchar(150) not null,
+constraint PKCliente primary key (IDCliente)
+);
+
+create table vendas (
+IDVenda int,
+ClienteID int,
+LivroID int,
+DataVenda date not null,
+Quantidade int not null,
+constraint PKVenda primary key (IDVenda),
+constraint FKClienteVenda foreign key (ClienteID) references Clientes (IDCliente),
+constraint FKLivroVenda foreign key (LivroID) references Livros (IDLivro)
+);
