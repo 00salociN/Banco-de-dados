@@ -11,8 +11,8 @@ Titulo varchar(150) not null,
 AnoPublicacao int not null,
 AutorID int,
 preco float not null,
-contraint PKTitulo primary key (IDLivro),
-contraint FKAutorLivro foreign key (AutorID) references Autores (IDAutor)
+constraint PKLivro primary key (IDLivro),
+constraint FKAutorLivro foreign key (AutorID) references Autores (IDAutor)
 );
 
 create table Clientes (
