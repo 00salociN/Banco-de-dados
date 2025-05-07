@@ -1,3 +1,10 @@
-select * from livros order by preco;
+ select * from livros order by preco;
 
+select livroid, sum(quantidade) as quantidade from vendas group by livroid;
+
+select autorid, avg(preco) as preco from livros group by autorid;
+
+select idlivro, min(autorid) > 1 as titulo from livros group by autorid;
+
+select autorid, count(idlivro) as quantidade from livros group by autorid having count(idlivro) > 1;
 
