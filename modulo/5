@@ -1,0 +1,5 @@
+select a.nome, l.titulo from autores as a inner join livros as l on a.idautor = l.autorid;
+
+select c.nome, l.titulo, v.datavenda from vendas as v inner join clientes as c on c.idcliente = v.clienteid inner join livros as l on l.idlivro = v.livroid;
+
+select a.nacionalidade from vendas as v inner join autores as a on a.nacionalidade = v.clienteid where nacionalidade != "americano"
