@@ -1,0 +1,5 @@
+select a.nome as autores, count(v.idvenda) as livrosvendidos from autores a join livros l on a.idautor = l.autorid join vendas v on l.idlivro = v.livroid group by a.nome;
+
+select c.nome from clientes c left join vendas v on c.idcliente = v.clienteid group by c.nome having count(v.livroid) > 2;
+
+select l.idlivro, l.titulo from livros l left join vendas v on l.idlivro = v.livroid where v.livroid is null;
