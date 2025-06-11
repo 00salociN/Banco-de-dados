@@ -42,3 +42,28 @@ create view pedidosimples as select id, clienteid, produto, valor, data from ped
 
 insert into pedidosimples (clienteid, produto, valor, data)
 values (3, "SSD", 270.00 "2025-06-01");
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+create table funcionarios (
+id int auto_increment,
+nome varchar(200),
+departamento varchar(75),
+constraint PKFuncionarios primary key(id)
+);
+
+create view funcionariosTI as
+select * from funcionarios
+where departamento = 'TI'
+with check option;
+
+insert into funcionariosTI (nome, departamento)
+values ('Carlos', 'TI');
+
+insert into funcionariosti (nome, departamento)
+values ('Ana', 'RH');
+
+
+update funcionariosti
+set departamento = 'Financeiro'
+where nome = 'Carlos';
