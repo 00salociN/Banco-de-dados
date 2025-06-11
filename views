@@ -35,3 +35,10 @@ insert into clientes(nome, cidade, estado) values
     create view RelatorioPedidos as select c.nome as clientes, c.cidade, p.produto, p.valor, p.data from pedidos p join clientes c on p.clienteid = c.id
 
     
+  
+
+
+create view pedidosimples as select id, clienteid, produto, valor, data from pedidos;
+
+insert into pedidosimples (clienteid, produto, valor, data)
+values (3, "SSD", 270.00 "2025-06-01");
