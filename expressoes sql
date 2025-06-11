@@ -1,0 +1,27 @@
+      AVISO ⚠️: NENHUMA DAS SEGUINTES VIEWS PODEM FAZER A INSERÇÃO DE DADOS NA PRÓPRIA VIEW.
+      
+
+expressão aritmética
+create view produtoscomimposto as 
+select nome, preco,
+preco * 1.1 as produtocomimposto
+from produtos;
+
+Strings 
+create view nomecompletodosclientes as 
+select
+concat(nome, ' ', sobrenome) as nomecompleto, cidade
+from clientes;
+
+IF / Case
+create view statuspedidos as
+select id, valor, 
+IF(valor > 1000, 'Alto', 'normal') as status
+from pedidos
+
+data
+create view datapedidos as 
+select id, data
+year(data) as ano,
+month(data) as mes
+from pedidos;
