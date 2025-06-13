@@ -1,0 +1,6 @@
+CREATE TABLE telefones (
+    id SERIAL PRIMARY KEY,
+    numero VARCHAR(20) NOT NULL,
+    tipo VARCHAR(50),
+    entidade_tipo VARCHAR(30) NOT NULL,  -- 'cliente', 'empresa', etc.
+    entidade_id INT NOT NULL     
