@@ -1,0 +1,46 @@
+Escreva uma consulta SQL para normalizar uma tabela na Primeira Forma Normal (1NF).
+
+-- Exemplo de tabela fora da primeira norma (1NF)
+create table clientes (
+    ID int auto_increment,
+    Nome varchar(200) not null,
+    CPF varchar(17) unique,
+    Endereco varchar(100) not null,
+    constraint PKID primary key(id)
+);
+
+-- Exemplo de tabela normalizada da primeira norma (1NF)
+create table clientes (
+    ID int auto_increment,
+    EnderecoID int not null,
+    Nome varchar(200) not null,
+    CPF varchar(17) not null unique,
+    constraint PKID primary key(id),
+    constraint FKEnderecoCli foreign key (EnderecoID) references endereco(id)
+);
+
+create table endereco (
+    IDEndereco int auto_increment,
+    NomeRua varchar(100) not null,
+    Numero int not null,
+    Logadouro varchar(50) not null,
+    bairro varchar(50) not null,
+    CEP varchar(20) not null,
+    cidade varchar(50) not null,
+    UF char(2) not null,
+    constraint PKEndereco primary key(IDEndereco)
+);
+
+
+
+/* Explicações:
+- O objetivo é eliminar grupos repetidos e garantir valores atômicos em cada coluna, alcançando 1NF;
+- O 1NF garante que os dados sejam armazenados em um formato estruturado, facilitando a consulta e a manutenção;
+- Elimina a redundância causada por grupos repetidos.
+*/
+
+/* Anotações:
+- Grupos repetidos violam 1NF e podem levar a anomalias de dados;
+- Certifique-se de que todas as colunas contenham valores atômicos após a normalização;
+- A divisão de tabelas pode aumentar o número de linhas, mas melhora a integridade dos dados.
+*/

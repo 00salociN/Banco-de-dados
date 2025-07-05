@@ -1,0 +1,39 @@
+Escreva uma consulta SQL para eliminar dependências transitivas e obter 3NF.
+
+-- exemplo de tabela com dependência transitiva 
+create table funcionarios(
+    id int auto_increment,
+    departamentoid int not null,
+    nomefuncionario varchar(100) not null,
+    nomedepartamento varchar(100) not null,
+    salario decimal(5,2) not null,
+    constraint PKIDFuncionarios primary key(id)
+);
+
+-- exemplo de tabela na 3NF sem a dependência transitiva
+create table departamento(
+    id int auto_increment,
+    nomedepartamento varchar(100) not null,
+    constraint PKDepartamento primary key(id)
+);
+
+create table funcionarios(
+    id int not null,
+    departamentoid int not null,
+    nomefuncionario varchar(100) not null,
+    salario decimal(5,2) not null,
+    constraint PKIDFuncionarios primary key(id),
+    constraint FKDepartamento foreign (departamentoid) references departamento(id)
+);
+
+/* Explicações:
+- O objetivo é eliminar dependências transitivas separando atributos dependentes em suas próprias tabelas;
+- O 3NF garante que os atributos não chave dependam apenas da chave primária, reduzindo a redundância;
+- Ele evita anomalias causadas por atualizações ou exclusões;
+- Nos sistemas de RH, separar os detalhes do departamento evita a duplicação de nomes de departamentos.
+*/
+
+/* Anotações:
+- As dependências transitivas ocorrem quando um atributo não chave depende de outro atributo não chave.
+- Use a normalização para simplificar as consultas e melhorar a integridade dos dados;
+- Evite a normalização excessiva, que pode complicar as junções.

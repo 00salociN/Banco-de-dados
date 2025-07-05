@@ -1,0 +1,39 @@
+Escreva uma consulta SQL para resolver dependências parciais e obter 2NF.
+
+-- exemplo de tabela fora da segunda forma (2NF)
+create table pedidos(
+    id int auto_increment,
+    clienteid int not null,
+    produtoid int null,
+    nomecliente varchar(50) not null,
+    quantidade int not null,
+    constraint PKIDPedidos primary key(id)
+);
+
+-- exemplo de tabela com a segunda forma (2NF)
+create table clientes(
+    id int auto_increment,
+    nomecliente varchar(100)
+);
+
+create table pedidos(
+    id int auto_increment,
+    clienteid int not null,
+    quantidade int not null,
+    constraint PKIDPedidos primary key(id),
+    constraint FKIDclientes foreign key (clienteid) references clientes(id)
+);
+
+
+/* Explicações:
+- O objetivo é eliminar dependências parciais separando atributos não chave em suas próprias tabelas;
+- O 2NF reduz a redundância, garantindo que os atributos não chave dependam de toda a chave primária;
+- Ele melhora a consistência dos dados e reduz as anomalias de atualização;
+- Nos sistemas de estoque, separar os detalhes do cliente e do pedido evita a duplicação das informações do cliente.
+*/
+
+/* Anotações:
+- As dependências parciais ocorrem quando atributos não chave dependem de parte de uma chave composta;
+- Use chaves primárias e estrangeiras para impor relações entre tabelas;
+- Garanta a integridade referencial ao dividir tabelas.
+*/
