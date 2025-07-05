@@ -1,0 +1,100 @@
+1. SELECT – Seleciona dados de uma ou mais tabelas.
+2. FROM – Especifica a tabela a partir da qual selecionar os registros.
+3. WHERE – Filtra os registros com base em condição.
+4. INSERT INTO – Insere novos dados em uma tabela.
+5. UPDATE – Modifica registros existentes em uma tabela.
+6. DELETE – Remove registros de uma tabela.
+7. CREATE DATABASE – Cria uma nova base de dados.
+8. DROP DATABASE – Exclui uma base de dados.
+9. CREATE TABLE – Cria uma nova tabela.
+10. DROP TABLE – Exclui uma tabela.
+11. ALTER TABLE – Modifica uma tabela existente.
+12. SHOW DATABASES – Lista todas as bases de dados.
+13. SHOW TABLES – Lista todas as tabelas em uma base de dados.
+14. DESCRIBE – Mostra a estrutura de uma tabela.
+15. LIMIT – Especifica o número máximo de registros a retornar.
+16. ORDER BY – Ordena os registros por uma ou mais colunas.
+17. GROUP BY – Agrupa os registros por uma ou mais colunas.
+18. HAVING – Filtra os resultados do GROUP BY.
+19. DISTINCT – Retorna apenas valores distintos.
+20. JOIN – Une tabelas com base em colunas relacionadas.
+21. INNER JOIN – Retorna registros com valores correspondentes em ambas as tabelas.
+22. LEFT JOIN (ou LEFT OUTER JOIN) – Retorna todos os registros da tabela esquerda e os correspondentes da tabela direita.
+23. RIGHT JOIN (ou RIGHT OUTER JOIN) – Retorna todos os registros da tabela direita e os correspondentes da tabela esquerda.
+24. FULL JOIN (ou FULL OUTER JOIN) – Retorna registros quando há correspondência em uma das tabelas.
+25. UNION – Combina o resultado de dois ou mais comandos SELECT.
+26. LIKE – Procura por um padrão especificado.
+27. IN – Verifica se um valor está dentro de um conjunto de valores.
+28. BETWEEN – Filtra valores dentro de um intervalo especificado.
+29. NOT – Nega uma condição.
+30. AND – Combina condições.
+31. OR – Retorna verdadeiro se qualquer condição for verdadeira.
+32. COUNT() – Retorna o número de registros.
+33. SUM() – Retorna a soma total.
+34. AVG() – Retorna o valor médio.
+35. MIN() – Retorna o menor valor.
+36. MAX() – Retorna o maior valor.
+37. AS – Renomeia uma coluna ou tabela com um alias.
+38. SET – Especifica as colunas e os valores a serem atualizados.
+39. PRIMARY KEY – Define a chave primária de uma tabela.
+40. FOREIGN KEY – Define a chave estrangeira de uma tabela.
+41. USE – Seleciona a base de dados para todos os comandos subsequentes.
+42. START TRANSACTION – Inicia uma nova transação.
+43. COMMIT – Salva todas as transações.
+44. ROLLBACK – Desfaz uma transação.
+45. SAVEPOINT – Cria um ponto na transação para ROLLBACK parcial.
+46. GRANT – Concede privilégios a usuários.
+47. REVOKE – Retira privilégios de usuários.
+48. CHARACTER SET – Define o conjunto de caracteres usado.
+49. COLLATE – Define a regra de ordenação.
+50. AUTO\_INCREMENT – Configura autonumeração de colunas.
+51. BACKUP DATABASE – Cria uma cópia de segurança da base de dados.
+52. RESTORE DATABASE – Restaura uma cópia de segurança.
+53. INDEX – Cria ou exclui índices para acelerar consultas.
+54. TRUNCATE TABLE – Exclui todos os registros de uma tabela, preservando sua estrutura.
+55. EXPLAIN – Fornece informações sobre o plano de execução de uma consulta.
+56. DATE() – Retorna apenas a parte de data de um valor datetime.
+57. NOW() – Retorna a data e hora atuais.
+58. CURDATE() – Retorna a data atual.
+59. CURTIME() – Retorna a hora atual.
+60. DATEDIFF() – Retorna a diferença em dias entre duas datas.
+61. DATE\_ADD() – Adiciona uma unidade de tempo a uma data.
+62. DATE\_SUB() – Subtrai uma unidade de tempo de uma data.
+63. UPPER() – Converte uma string para maiúsculas.
+64. LOWER() – Converte uma string para minúsculas.
+65. LENGTH() – Retorna o comprimento de uma string.
+66. TRIM() – Remove espaços ou caracteres especificados do início ou fim de uma string.
+67. SUBSTR() – Retorna uma parte de uma string.
+68. REPLACE() – Substitui todas as ocorrências de uma substring.
+69. ROUND() – Arredonda um número.
+70. CEIL() – Retorna o menor inteiro maior ou igual ao número especificado.
+71. FLOOR() – Retorna o maior inteiro menor ou igual ao número especificado.
+72. CAST() – Converte um valor para um tipo especificado.
+73. COALESCE() – Retorna o primeiro valor não-nulo em uma lista.
+74. NULLIF() – Retorna NULL se dois valores forem iguais; senão retorna o primeiro valor.
+75. IFNULL() – Retorna o primeiro valor se não for NULL; senão retorna o segundo.
+76. CONCAT() – Concatena duas ou mais strings.
+77. SHOW WARNINGS – Exibe mensagens de aviso da última instrução.
+78. SHOW ERRORS – Exibe mensagens de erro da última instrução.
+79. LAST\_INSERT\_ID() – Retorna o ID do último registro inserido em coluna AUTO\_INCREMENT.
+80. SHOW INDEX – Exibe informações sobre índices em uma tabela.
+81. SHOW VARIABLES – Exibe variáveis de configuração do servidor.
+82. SET PASSWORD – Altera a senha de um usuário.
+83. LOAD DATA INFILE – Carrega dados de um arquivo para uma tabela.
+84. CASE – Define múltiplas condições em expressão condicional.
+85. VALUES() – Acessa valores de colunas na cláusula INSERT.
+86. CREATE PROCEDURE – Cria um procedimento armazenado.
+87. CALL – Executa um procedimento armazenado.
+88. CREATE FUNCTION – Cria uma função definida pelo usuário.
+89. SHOW PROCESSLIST – Exibe informações sobre threads em execução.
+90. KILL – Encerra uma thread ou processo no servidor.
+91. BINARY – Trata uma string como valor binário para comparações.
+92. SIGNED – Converte um valor para número inteiro com sinal.
+93. UNSIGNED – Converte um valor para número inteiro sem sinal.
+94. VARCHAR() – Declara coluna de texto de comprimento variável.
+95. CHAR() – Declara coluna de texto de comprimento fixo.
+96. TEXT – Declara coluna para armazenamento de texto longo.
+97. ENUM() – Define uma lista de valores permitidos para a coluna.
+98. SET – Declara coluna que pode armazenar uma lista de valores pré-definidos.
+99. BLOB – Declara coluna para armazenamento de dados binários.
+100. SHOW PROFILE – Exibe informações de perfil de desempenho da última consulta.
