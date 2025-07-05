@@ -1,0 +1,23 @@
+Escreva uma consulta SQL para resolver chaves candidatas sobrepostas e obter BCNF ou 3.5NF.
+
+-- Tabela com chave candidata sobreposta
+create table cursos(
+    id int,
+    instrutorid int,
+    nomeinstrutor varchar(100) not null,
+    primary key(id, instrutorid)
+);
+
+-- Tabela dividindo a chave candidata sobreposta em sua tabelas
+create table instrutores(
+    id int auto_increment,
+    nomeinstrutor varchar(100) not null,
+    constraint PKIDInstrutor primary key(id)
+);
+
+create table cursos(
+    id int,
+    idinstrutor int,
+    primary key(id, idinstrutor),
+    constraint FKinstrutor foreign key (idinstrutor)
+);
