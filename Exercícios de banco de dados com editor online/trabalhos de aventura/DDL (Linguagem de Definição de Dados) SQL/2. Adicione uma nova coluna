@@ -1,0 +1,13 @@
+Escreva uma consulta SQL para adicionar uma nova coluna a uma tabela existente.
+
+-- tabela existente
+create table cliente(
+    id int auto_increment,
+    nomecliente varchar(100),
+    idade int not null check (idade > -1),
+    altura decimal(5,2) not null,
+    constraint PKcliente primary key(id)
+);
+
+-- adicionando um campo
+alter table cliente add salario decimal(10,2) not null default 0.00;

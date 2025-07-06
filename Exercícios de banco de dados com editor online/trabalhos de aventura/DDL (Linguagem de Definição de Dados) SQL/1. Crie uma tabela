@@ -1,0 +1,10 @@
+Escreva uma consulta SQL para criar uma tabela com colunas e restrições específicas.
+
+-- Criação da tabela
+create table cliente(
+    id int auto_increment,
+    nomecliente varchar(100),
+    idade int not null check (idade > -1),
+    altura decimal(5,2) not null,
+    constraint PKcliente primary key(id)
+);

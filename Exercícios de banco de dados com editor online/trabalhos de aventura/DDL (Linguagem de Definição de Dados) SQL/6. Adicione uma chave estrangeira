@@ -1,0 +1,20 @@
+Escreva uma consulta SQL para criar uma relação de chave estrangeira entre duas tabelas.
+
+-- tabela existente
+create table funcionario(
+    id int auto_increment,
+    nomecliente varchar(100),
+    idade int not null check (idade > -1),
+    altura decimal(5,2) not null,
+    CPF int,
+    constraint PKFuncionarios primary key(id)
+);
+
+-- tabela para add a FK
+create table emprego(
+    id int auto_increment,
+    funcionarioid int not null,
+    nomeemprego varchar(100),
+    constraint PKemprego primary key(id),
+    constraint FKfuncionario foreign key(funcionarioid) references funcionario(id)
+);

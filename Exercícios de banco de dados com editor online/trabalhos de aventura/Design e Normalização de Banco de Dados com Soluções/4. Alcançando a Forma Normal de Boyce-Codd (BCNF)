@@ -21,3 +21,16 @@ create table cursos(
     primary key(id, idinstrutor),
     constraint FKinstrutor foreign key (idinstrutor)
 );
+
+/* Explicações:
+- O objetivo é resolver chaves candidatas sobrepostas e obter BCNF;
+- O BCNF elimina anomalias causadas pela sobreposição de chaves candidatas;
+- Ele garante que cada determinante seja uma chave candidata;
+- Nos sistemas educacionais, separar os detalhes do instrutor evita conflitos nas atribuições do curso.
+*/
+
+/* Anotações:
+- O BCNF é mais rigoroso que o 3NF e resolve anomalias não abordadas pelo 3NF;
+- Identifique todas as chaves candidatas antes de aplicar o BCNF;
+- O BCNF pode exigir tabelas adicionais, aumentando a complexidade.
+*/

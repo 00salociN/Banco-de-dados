@@ -1,0 +1,61 @@
+Escreva uma consulta SQL para identificar e resolver anomalias de atualização em uma tabela mal projetada.
+
+-- Tabela original, antes do update das anomalias
+create table estudante(
+    id int auto_increment,
+    cursoid int not null,
+    nomecurso varchar(100) not null,
+    nomeinstrutor varchar(100) not null,
+    constraint PKEstudante primary key(id)
+);
+
+-- Tabela após a correção da anomalia
+create table estudante(
+    id int auto_increment,
+    nomeestudante varchar(100) not null,
+    constraint PKEstudante primary key(id)
+);
+
+create table instrutor(
+    id int auto_increment,
+    nomeinstrutor varchar(100) not null,
+    constraint PKInstrutor primary key(id)
+);
+
+create table curso(
+    id int auto_increment,
+    instrutorid int not null,
+    nomecurso varchar(100),
+    constraint PKCurso primary key(id),
+    constraint FKinstrutor foreign key(instrutorid) references instrutor(id)
+);
+
+create table matricula(
+    estudanteid int not null,
+    cursoid int not null,
+    constraint PKMatricula primary key(estudanteid, cursoid),
+    constraint FKestudante foreign key(estudanteid) references estudante(id),
+    constraint FKCurso foreign key(cursoid) references curso(id)
+);
+
+
+/* 
+    Explicações:
+        - O objetivo é identificar anomalias de atualização e resolvê-las por meio da normalização;
+    Componentes chave:
+        - Cursos e Instrutores: Armazene os detalhes do curso e do instrutor de forma independente.
+        - Cursos: Vincula os alunos a cursos e instrutores.
+    Por que resolver anomalias? :
+        - As anomalias de atualização ocorrem quando as alterações em um atributo exigem atualizações em várias linhas.
+        - A normalização garante consistência e reduz o esforço de manutenção.
+    Aplicação no mundo real:
+        -Nos bancos de dados escolares, a normalização evita inconsistências nos dados do curso e do instrutor.
+*/
+
+/*
+    Anotações:
+        - Anomalias de atualização são comuns em tabelas desnormalizadas.
+        - Use a normalização para simplificar as atualizações e reduzir erros.
+    Considerações importantes:
+        - Equilibre a normalização com o desempenho da consulta.
+*/
