@@ -17,7 +17,7 @@ create table funcionario(
 CPFfun char(11) not null unique,
 nomefun varchar(100) not null,
 endereco varchar(100) not null,
-telefone int(20) not null,
+telefone varchar(20) not null,
 funcao varchar(100) not null,
 constraint PKFunc primary key(CPFfun)
 );
