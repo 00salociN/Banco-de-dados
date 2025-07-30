@@ -38,6 +38,15 @@ constraint FKAnimalserv foreign key (AnimalID) references animal(IDAnimal)
 
 
 
-create view Boletim_Servicos as select cliente.nome, animal.nomeanimal, servicoanimal.descricaoservico, funcionario.nome, servicoanimal.preco, servicoanimal.data join servicoanimal on servicoanimal.id = servivoanimal.id  
-
-
+create view Boletim_Servicos as
+select
+cliente.nome,
+animal.nomeanimal,
+servicoanimal.descricaoservico,
+funcionario.nomefun,
+servicoanimal.preco,
+servicoanimal.data
+    from servicoanimal
+    join cliente on servicoanimal.Clientecpf = cliente.CPFCli
+    join animal on servicoanimal.AnimalID = animal.idanimal
+    join funcionario on servicoanimal.CPFFun = funcionario.cpffun;
