@@ -35,3 +35,9 @@ constraint FKCPFCli foreign key (ClienteCPF) references cliente(CPFCli),
 constraint FKCPFFun foreign key (CPFFun) references funcionario(CPFFun),
 constraint FKAnimalserv foreign key (AnimalID) references animal(IDAnimal)
 );
+
+
+
+create view Boletim_Servicos as select cliente.nome, animal.nomeanimal, servicoanimal.descricaoservico, funcionario.nome, servicoanimal.preco, servicoanimal.data join servicoanimal on servicoanimal.id = servivoanimal.id  
+
+
