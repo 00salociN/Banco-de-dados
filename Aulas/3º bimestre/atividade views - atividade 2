@@ -64,3 +64,17 @@ constraint FKCPFCli foreign key (ClienteCPF) references cliente(CPFCli),
 constraint FKCPFFun foreign key (CPFFun) references funcionario(CPFFun),
 constraint FKAnimalserv foreign key (AnimalID) references animal(IDAnimal)
 );
+
+create view relatorio_compras as
+select     
+cliente.nome,
+funcionario.nomefun,
+compra.idcompra,
+produto.nome as nomeproduto,
+compra.vaolrtotal as valortotal,
+compra.data
+from compra
+join cliente on compra.clientecpf = cliente.cpfcli
+join funcionario on compra.funcpf = funcionario.cpffun
+join compraproduto on compraproduto.compraid = compra.idcompra
+    -> join produto on compraproduto.prodid = produto.idprod;
