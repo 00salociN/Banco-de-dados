@@ -35,7 +35,7 @@ create table compra(
 IDCompra int auto_increment,
 ClienteCPF char(11) not null,
 FunCPF char(11) not null,
-vaolrtotal decimal(10,2) not null unique,
+vaolrtotal decimal(10,2) not null,
 data date not null,
 constraint PKCompra primary key(IDCompra),
 constraint FKCompraCliCPF foreign key (clientecpf) references cliente(cpfcli),
