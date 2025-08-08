@@ -77,4 +77,4 @@ from compra
 join cliente on compra.clientecpf = cliente.cpfcli
 join funcionario on compra.funcpf = funcionario.cpffun
 join compraproduto on compraproduto.compraid = compra.idcompra
-    -> join produto on compraproduto.prodid = produto.idprod;
+join produto on compraproduto.prodid = produto.idprod;
