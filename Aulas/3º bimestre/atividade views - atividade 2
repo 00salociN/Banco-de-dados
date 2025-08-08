@@ -33,8 +33,8 @@ constraint PKProd primary key(idprod)
 
 create table compra(
 IDCompra int auto_increment,
-ClienteCPF char(11) not null unique,
-FunCPF char(11) not null unique,
+ClienteCPF char(11) not null,
+FunCPF char(11) not null,
 vaolrtotal decimal(10,2) not null unique,
 data date not null,
 constraint PKCompra primary key(IDCompra),
@@ -54,7 +54,7 @@ constraint FKProdCompProd foreign key (prodid) references produto(idprod)
 create table servicoanimal(
 IDServico int auto_increment,
 ClienteCPF char(11) not null,
-CPFFun char(11) not null unique,
+CPFFun char(11) not null,
 AnimalID int not null,
 descricaoservico varchar(100) not null,
 preco decimal(10,2) not null,
