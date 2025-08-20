@@ -1,0 +1,33 @@
+create table departamentos (
+iddepartamento int not null auto_increment,
+nomedepartamento varchar(255) not null,
+constraint pkdep primary key(iddepartamento)
+);
+
+create table funcionarios (
+idfun int not null auto_increment,
+nomefuncionario varchar(255) not null,
+email varchar(255) not null,
+departamentoid int not null,
+constraint pkfun primary key(idfun),
+constraint fkfundep foreign key (departamentoid) references departamentos(iddepartamento)
+);
+
+create table projetos (
+idprojeto int not null auto_increment,
+funid int not null,
+nomeproj varchar(255) not null,
+constraint pkproj primary key(idprojeto),
+constraint fkprojfun foreign key (funid) references funcionarios(idfun)
+);
+
+create view equipe_projeto as select
+departamentos.iddepartamento,
+departamentos.nomedepartamento,
+funcionarios.idfun
+funcionarios.nomefuncionario,
+projetos.idprojeto,
+projetos.nomeproj
+from projetos
+join departamentos on funcionarios.departamentoid = departamentos.iddepartamento
+join funcionarios on projetos.funid = funcionarios.idfun
