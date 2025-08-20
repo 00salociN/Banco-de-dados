@@ -24,7 +24,7 @@ constraint fkprojfun foreign key (funid) references funcionarios(idfun)
 create view equipe_projeto as select
 departamentos.iddepartamento,
 departamentos.nomedepartamento,
-funcionarios.idfun
+funcionarios.idfun,
 funcionarios.nomefuncionario,
 projetos.idprojeto,
 projetos.nomeproj
