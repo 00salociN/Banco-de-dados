@@ -35,3 +35,16 @@ situacao varchar(255) not null,
 constraint pkhistorico primary key(histid),
 constraint fkdischist foreign key (iddisc) references disciplinas(discid)
 );
+
+
+create view boletim as 
+select 
+alunos.nomealun as nome_do_aluno,
+alunos.matricula,
+disciplinas.discid as disciplina_id,
+historico_escolar.semestre,
+historico_escolar.media,
+historico_escolar.faltas,
+historico_escola.situacao
+from historico_escolar
+join disciplinas on historico_escolar.iddisc = disciplinas.discid;
