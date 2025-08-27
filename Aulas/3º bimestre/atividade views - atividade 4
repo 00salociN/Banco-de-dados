@@ -15,14 +15,31 @@ constraint pkidprof primary key(profid)
 create table cursos (
 idcurso int auto_increment,
 nomecurso varchar(255),
-constraint pkcurso primary key(idcurso)
+fkprof int not null,
+constraint pkcurso primary key(idcurso),
+constraint fkprof foreign key(fkprof) references professores (profid)
+);
+
+create table professor_curso (
+fkprofessor int not null,
+fkcurso int not null,
+primary key (fkprofessor, fkcurso),
+constraint fkprof foreign key(fkprofessor) references professores(profid),
+constraint fkcur foreign key(fkcurso) refences cursos(idcurso)
 );
 
 create table disciplinas (
 discid int auto_increment,
 nomedisc varchar(255) not null,
-idprof int not null,
 constraint pkdisc primary key(discid)
+);
+
+create table professor_disciplina (
+fkprofessor int not null,
+fkdisc int not null,
+primary key (fkprofessor, fkdisc),
+constraint fkprof foreign key(fkprofessor) references professores(profid),
+constraint fkdisc foreign key(fkdisc) refences cursos(discid)
 );
 
 create table historico_escolar (
@@ -33,6 +50,7 @@ semestre char(1) not null,
 media decimal(4,2) not null,
 faltas char(3) not null,
 situacao varchar(255) not null,
+ano char(4) not null,
 constraint pkhistorico primary key(histid),
 constraint fkaluno foreign key(fkraluno) references alunos(ra),
 constraint fkdischist foreign key (iddisc) references disciplinas(discid)
