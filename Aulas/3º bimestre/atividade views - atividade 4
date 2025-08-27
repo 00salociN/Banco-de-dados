@@ -9,7 +9,7 @@ create table professores (
 profid int auto_increment,
 nomeprof varchar(255),
 gmail varchar(255),
-constraint pkidprof primary key(prodid)
+constraint pkidprof primary key(profid)
 );
 
 create table cursos (
@@ -26,7 +26,7 @@ constraint pkdisc primary key(discid)
 );
 
 create table historico_escolar (
-histid int auto_increment
+histid int auto_increment,
 iddisc int not null,
 semestre char(1) not null,
 média decimal(4,2) not null,
