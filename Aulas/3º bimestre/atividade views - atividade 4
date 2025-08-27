@@ -49,4 +49,5 @@ historico_escolar.media,
 historico_escolar.faltas,
 historico_escolar.situacao
 from historico_escolar
-join disciplinas on historico_escolar.iddisc = disciplinas.discid;
+join disciplinas on historico_escolar.iddisc = disciplinas.discid
+join alunos on historico_escolar.fkraluno = alunos.ra;
