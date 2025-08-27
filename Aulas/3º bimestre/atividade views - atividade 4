@@ -28,11 +28,13 @@ constraint pkdisc primary key(discid)
 create table historico_escolar (
 histid int auto_increment,
 iddisc int not null,
+fkraluno int not null,
 semestre char(1) not null,
 média decimal(4,2) not null,
 faltas char(3) not null,
 situacao varchar(255) not null,
 constraint pkhistorico primary key(histid),
+constraint fkaluno foreign key(fkraluno) references alunos(ra),
 constraint fkdischist foreign key (iddisc) references disciplinas(discid)
 );
 
@@ -45,6 +47,6 @@ disciplinas.discid as disciplina_id,
 historico_escolar.semestre,
 historico_escolar.media,
 historico_escolar.faltas,
-historico_escola.situacao
+historico_escolar.situacao
 from historico_escolar
 join disciplinas on historico_escolar.iddisc = disciplinas.discid;
