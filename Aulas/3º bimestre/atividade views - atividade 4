@@ -1,0 +1,37 @@
+create table alunos (
+ra int auto_increment,
+nomealun varchar(255) not null,
+matricula varchar(255) not null,
+constraint pkra primary key(ra)
+);
+
+create table professores (
+profid int auto_increment,
+nomeprof varchar(255),
+gmail varchar(255),
+constraint pkidprof primary key(prodid)
+);
+
+create table cursos (
+idcurso int auto_increment,
+nomecurso varchar(255),
+constraint pkcurso primary key(idcurso)
+);
+
+create table disciplinas (
+discid int auto_increment,
+nomedisc varchar(255) not null,
+idprof int not null,
+constraint pkdisc primary key(discid)
+);
+
+create table historico_escolar (
+histid int auto_increment
+iddisc int not null,
+semestre char(1) not null,
+média decimal(4,2) not null,
+faltas char(3) not null,
+situacao varchar(255) not null,
+constraint pkhistorico primary key(histiid),
+constraint fkiddisc foreign key iddisc references disciplinas(discid)
+);
