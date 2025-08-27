@@ -33,5 +33,5 @@ média decimal(4,2) not null,
 faltas char(3) not null,
 situacao varchar(255) not null,
 constraint pkhistorico primary key(histiid),
-constraint fkiddisc foreign key iddisc references disciplinas(discid)
+constraint fkdischist foreign key iddisc references disciplinas(discid)
 );
