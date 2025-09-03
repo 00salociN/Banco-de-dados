@@ -137,3 +137,13 @@ count(distinct historico_escolar.iddisc) as total_disciplinas_cursadas
 from alunos
 join historico_escolar on alunos.ra = historico_escolar.fkraluno
 group by alunos.ra, alunos.nomealun;
+
+create view professor_view as
+select
+professores.nomeprof,
+disciplinas.nomedisc,
+historico_escolar.media
+from historico_escolar
+join disciplinas on historico_escolar.iddisc = disciplinas.discid
+join professor_disciplina on disciplinas.discid = professor_disciplina.fkdisc
+join professores on professor_disciplina.fkprofessor = professores.profid;
