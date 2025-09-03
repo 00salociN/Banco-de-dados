@@ -57,7 +57,7 @@ create table historico_escolar (
 histid int auto_increment,
 iddisc int not null,
 fkraluno int not null,
-fkturma int not null
+fkturma int not null,
 semestre char(1) not null,
 media decimal(4,2) not null,
 faltas char(3) not null,
