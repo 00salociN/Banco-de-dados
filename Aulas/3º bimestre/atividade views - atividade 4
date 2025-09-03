@@ -49,7 +49,8 @@ idturma int auto_increment,
 serie char(1) not null,
 ano char(4) not null,
 qntd_alunos char(2) not null,
-constraint pkturma primary key(idturma),
+constraint pkturma primary key(idturma)
+);
 
 
 create table historico_escolar (
