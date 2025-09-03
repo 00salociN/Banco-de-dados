@@ -2,7 +2,9 @@ create table alunos (
 ra int auto_increment,
 nomealun varchar(255) not null,
 matricula varchar(255) not null,
+fkturma int not null,
 constraint pkra primary key(ra)
+constraint fkturma foreign key(fkturma) references turmas(idturma)
 );
 
 create table professores (
@@ -42,10 +44,19 @@ constraint fkprofdisc foreign key(fkprofessor) references professores(profid),
 constraint fkdisc foreign key(fkdisc) references disciplinas(discid)
 );
 
+create table turmas (
+idturma int auto_increment,
+serie char(1) not null,
+ano char(4) not null,
+qntd_alunos char(2) not null,
+constraint pkturma primary key(idturma),
+
+
 create table historico_escolar (
 histid int auto_increment,
 iddisc int not null,
 fkraluno int not null,
+fkturma int not null
 semestre char(1) not null,
 media decimal(4,2) not null,
 faltas char(3) not null,
@@ -53,7 +64,8 @@ situacao varchar(255) not null,
 ano char(4) not null,
 constraint pkhistorico primary key(histid),
 constraint fkaluno foreign key(fkraluno) references alunos(ra),
-constraint fkdischist foreign key (iddisc) references disciplinas(discid)
+constraint fkdischist foreign key (iddisc) references disciplinas(discid),
+constraint fkturmahistorico foreign key(fkturma) references turmas(idturma)
 );
 
 
@@ -100,3 +112,15 @@ from historico_escolar
 join alunos on historico_escolar.fkraluno = alunos.ra
 join disciplinas on historico_escolar.iddisc = disciplinas.discid
 where historico_escolar.faltas < 5;
+
+create view disciplina as 
+select
+disciplinas.discid,
+disciplinas.nomedisc,
+turmas.idturma,
+professores.nomeprof
+from historico_escolar
+join disciplinas on historico_escolar.iddisc = disciplinas.discid
+join professores on professor_disciplina.fkprofessor = professores.profid
+join turmas on historico_escolar.fkturma = turmas.idturma
+where turmas.qntd_alunos > 8;
