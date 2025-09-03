@@ -3,7 +3,7 @@ ra int auto_increment,
 nomealun varchar(255) not null,
 matricula varchar(255) not null,
 fkturma int not null,
-constraint pkra primary key(ra)
+constraint pkra primary key(ra),
 constraint fkturma foreign key(fkturma) references turmas(idturma)
 );
 
