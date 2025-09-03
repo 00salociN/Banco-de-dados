@@ -147,3 +147,10 @@ from historico_escolar
 join disciplinas on historico_escolar.iddisc = disciplinas.discid
 join professor_disciplina on disciplinas.discid = professor_disciplina.fkdisc
 join professores on professor_disciplina.fkprofessor = professores.profid;
+
+CREATE VIEW Sem_Aluno AS
+SELECT d.*
+FROM disciplinas d
+JOIN matriculas m ON d.id = m.disciplina_id AND m.ano = 2015
+JOIN alunos a ON m.aluno_id = a.id
+WHERE a.id IS NULL;
