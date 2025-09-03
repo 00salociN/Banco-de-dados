@@ -2,6 +2,7 @@ create table alunos (
 ra int auto_increment,
 nomealun varchar(255) not null,
 matricula varchar(255) not null,
+cidade varchar(100) not null,
 fkturma int not null,
 constraint pkra primary key(ra),
 constraint fkturma foreign key(fkturma) references turmas(idturma)
@@ -126,3 +127,13 @@ join professor_disciplina on disciplinas.discid = professor_disciplina.fkdisc
 join professores on professor_disciplina.fkprofessor = professores.profid
 join turmas on historico_escolar.fkturma = turmas.idturma
 where turmas.qntd_alunos > 8;
+
+create view alunos_view as 
+select
+alunos.matricula,
+alunos.nomealun,
+alunos.cidade,
+count distintic(historico_escolar.iddisc) as total_disciplinas_cursadas
+from alunos
+join historico_escolar on alunos.ra = historico_escolar.fkraluno
+group by alunos.ra, alunos.nomealun;
