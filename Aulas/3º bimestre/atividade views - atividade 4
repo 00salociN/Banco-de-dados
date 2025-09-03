@@ -122,6 +122,7 @@ turmas.idturma,
 professores.nomeprof
 from historico_escolar
 join disciplinas on historico_escolar.iddisc = disciplinas.discid
+join professor_disciplina on disciplinas.discid = professor_disciplina.fkdisc
 join professores on professor_disciplina.fkprofessor = professores.profid
 join turmas on historico_escolar.fkturma = turmas.idturma
 where turmas.qntd_alunos > 8;
