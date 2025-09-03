@@ -24,8 +24,8 @@ create table professor_curso (
 fkprofessor int not null,
 fkcurso int not null,
 primary key (fkprofessor, fkcurso),
-constraint fkprof foreign key(fkprofessor) references professores(profid),
-constraint fkcur foreign key(fkcurso) refences cursos(idcurso)
+constraint fkprofcur foreign key(fkprofessor) references professores(profid),
+constraint fkcur foreign key(fkcurso) references cursos(idcurso)
 );
 
 create table disciplinas (
@@ -38,8 +38,8 @@ create table professor_disciplina (
 fkprofessor int not null,
 fkdisc int not null,
 primary key (fkprofessor, fkdisc),
-constraint fkprof foreign key(fkprofessor) references professores(profid),
-constraint fkdisc foreign key(fkdisc) refences cursos(discid)
+constraint fkprofdisc foreign key(fkprofessor) references professores(profid),
+constraint fkdisc foreign key(fkdisc) references disciplinas(discid)
 );
 
 create table historico_escolar (
@@ -69,3 +69,34 @@ historico_escolar.situacao
 from historico_escolar
 join disciplinas on historico_escolar.iddisc = disciplinas.discid
 join alunos on historico_escolar.fkraluno = alunos.ra;
+
+
+create view responsavel_disc as 
+select
+professores.nomeprof,
+disciplinas.nomedisc
+from professor_disciplina
+join disciplinas on professor_disciplina.fkdisc = disciplinas.discid
+join professores on professor_disciplina.fkprofessor = professores.profid;
+
+create view prof_curso as 
+select
+cursos.idcurso,
+cursos.nomecurso,
+professores.profid as idprof,
+professores.nomeprof,
+professores.gmail as email
+from professor_curso
+join cursos on professor_curso.fkcurso = cursos.idcurso
+join professores on professor_curso.fkprofessor = professores.profid;
+
+create view aluno_situacao as 
+select
+alunos.nomealun as nome_aluno,
+disciplinas.nomedisc,
+historico_escolar.ano,
+historico_escolar.media
+from historico_escolar
+join alunos on historico_escolar.fkraluno = alunos.ra
+join disciplinas on historico_escolar.iddisc = disciplinas.discid
+where historico_escolar.faltas < 5;
