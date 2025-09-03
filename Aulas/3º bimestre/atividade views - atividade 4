@@ -133,7 +133,7 @@ select
 alunos.matricula,
 alunos.nomealun,
 alunos.cidade,
-count distintic(historico_escolar.iddisc) as total_disciplinas_cursadas
+count(distinct historico_escolar.iddisc) as total_disciplinas_cursadas
 from alunos
 join historico_escolar on alunos.ra = historico_escolar.fkraluno
 group by alunos.ra, alunos.nomealun;
