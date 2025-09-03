@@ -149,8 +149,8 @@ join professor_disciplina on disciplinas.discid = professor_disciplina.fkdisc
 join professores on professor_disciplina.fkprofessor = professores.profid;
 
 CREATE VIEW Sem_Aluno AS
-SELECT d.*
+SELECT d.discid, d.nomedisc
 FROM disciplinas d
-JOIN matriculas m ON d.id = m.disciplina_id AND m.ano = 2015
-JOIN alunos a ON m.aluno_id = a.id
-WHERE a.id IS NULL;
+JOIN historico_escolar h ON d.discid = h.iddisc AND h.ano = '2015'
+JOIN alunos a ON h.fkraluno = a.ra
+WHERE a.ra IS NULL;
