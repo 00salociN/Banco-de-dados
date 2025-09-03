@@ -164,6 +164,6 @@ from alunos
 join historico_escolar on alunos.ra = historico_escolar.fkraluno
 join disciplinas on historico_escolar.iddisc = disciplinas.discid
 join professor_disciplina on disciplinas.discid = professor_disciplina.fkdisc
-join professores on professor_disciplina = professores.profid
+join professores on professor_disciplina.fkprofessor = professores.profid
 where professores.nomeprof = "Marco Machado" and historico_escolar.media > 8
 group by alunos.ra, alunos.nomealun, alunos.matricula;
