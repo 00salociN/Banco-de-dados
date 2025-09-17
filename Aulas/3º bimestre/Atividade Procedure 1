@@ -15,6 +15,7 @@ begin select count(*) into p_autenticado
 from usuarios
 where usuario = p_usuario and senha = p_senha;
 end$$
+delimiter ;
 
 --------------------------------------------------PARTE 2--------------------------------------------------
 
@@ -37,3 +38,12 @@ begin
 insert into locais (nome_cliente, cidade, estado, região) values
 (p_nome_cliente, p_cidade, p_estado, p_regiao);
 end $$
+delimiter ;
+
+delimiter $$
+create procedure clicidade (in p_cidade varchar(50))
+begin
+select * from locais
+where cidade = p_cidade;
+end $$
+delimiter ;
