@@ -15,4 +15,13 @@ begin select count(*) into p_autenticado
 from usuarios
 where usuario = p_usuario and senha = p_senha;
 end$$
-delimiter;
+
+--------------------------------------------------PARTE 2--------------------------------------------------
+
+create table locais (
+id int auto_increment primary key,
+nome_cliente varchar(100),
+cidade varchar(50),
+estado varchar(50),
+região varchar(50)
+);
