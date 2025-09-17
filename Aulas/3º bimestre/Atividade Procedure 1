@@ -46,4 +46,4 @@ begin
 select * from locais
 where cidade = p_cidade;
 end $$
-delimiter ;
+delimiter;
