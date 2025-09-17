@@ -6,8 +6,8 @@ senha varchar(100)
 );
 
 delimiter $$
-create procedure autenticacao_usuario(
-in p_usuario varchar varchar(50),
+create procedure autentica_usuario(
+in p_usuario varchar(50),
 in p_senha varchar(100),
 out p_autenticado int
 )
