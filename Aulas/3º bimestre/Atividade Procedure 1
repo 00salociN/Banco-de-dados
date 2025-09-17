@@ -1,0 +1,18 @@
+create table usuarios (
+id int auto_increment primary key,
+nome varchar(100),
+usuario varchar(50),
+senha varchar(100)
+);
+
+delimiter $$
+create procedure autenticacao_usuario(
+in p_usuario varchar varchar(50),
+in p_senha varchar(100),
+out p_autenticado int
+)
+begin select count(*) into p_autenticado
+from usuarios
+where usuario = p_usuario and senha = p_senha;
+end$$
+delimiter;
