@@ -25,3 +25,15 @@ cidade varchar(50),
 estado varchar(50),
 região varchar(50)
 );
+
+delimiter $$
+create procedure inserir_local(
+in p_nome_cliente varchar(100),
+in p_cidade varchar(50),
+in p_estado varchar(50),
+in p_regiao varchar(50)
+)
+begin 
+insert into locais (nome_cliente, cidade, estado, região) values
+(p_nome_cliente, p_cidade, p_estado, p_regiao);
+end $$
