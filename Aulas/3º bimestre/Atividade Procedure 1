@@ -58,3 +58,22 @@ begin select count(*) into total
 from locais
 where cidade = p_cidade;
 end //
+
+
+
+delimiter //
+create procedure verificarregioes (
+in p_cidade varchar(50),
+out mensagem varchar(100)
+)
+begin 
+declare reg varchar(50);
+select regiao into reg from locais where cidade = p_cidade limit 1;
+if reg is null then
+set mensagem = 'Cidade não encontrada';
+elseif reg = 'Sudeste' then
+set mensagem = concat('A cidade ', p_cidade, ' está na rigião sudeste');
+else
+set mensagem = concat('A cidade ', p_cidade, ' está em outra região');
+end if;
+end //
