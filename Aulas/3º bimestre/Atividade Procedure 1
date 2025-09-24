@@ -50,7 +50,7 @@ delimiter;
 
 
 delimiter //
-create procedure contaclientecidade
+create procedure contaclientecidade (
 in p_cidade varchar(50),
 out total int
 )
