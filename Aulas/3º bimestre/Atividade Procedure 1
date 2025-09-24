@@ -79,3 +79,20 @@ end if;
 end //
 
 call verificarregioes ('São Paulo', @msg);
+select @msg
+
+delimiter //
+create procedure contarregioes (
+in p_regiao varchar(50),
+out total int 
+)
+begin
+declare contador int default 0;
+declare atual int default 0;
+select count(*) into toal from locais where regiao = p_regiao;
+set contador = total;
+set atual = 0;
+while atual < contador 00
+set atual = atual +1;
+end while;
+end //
