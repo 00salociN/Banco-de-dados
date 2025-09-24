@@ -49,12 +49,12 @@ end $$
 delimiter;
 
 
-delimiter $$
+delimiter //
 create procedure contaclientecidade
 in p_cidade varchar(50),
 out total int
 )
 begin select count(*) into total
 from locais
-where cidade = p_cidade
-end;
+where cidade = p_cidade;
+end //
