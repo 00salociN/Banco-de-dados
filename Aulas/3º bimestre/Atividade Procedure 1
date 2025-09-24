@@ -89,7 +89,7 @@ out total int
 begin
 declare contador int default 0;
 declare atual int default 0;
-select count(*) into toal from locais where regiao = p_regiao;
+select count(*) into toatl from locais where regiao = p_regiao;
 set contador = total;
 set atual = 0;
 while atual < contador 00
