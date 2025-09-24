@@ -24,7 +24,7 @@ id int auto_increment primary key,
 nome_cliente varchar(100),
 cidade varchar(50),
 estado varchar(50),
-região varchar(50)
+regiao varchar(50)
 );
 
 delimiter $$
@@ -35,7 +35,7 @@ in p_estado varchar(50),
 in p_regiao varchar(50)
 )
 begin 
-insert into locais (nome_cliente, cidade, estado, região) values
+insert into locais (nome_cliente, cidade, estado, regiao) values
 (p_nome_cliente, p_cidade, p_estado, p_regiao);
 end $$
 delimiter ;
@@ -77,3 +77,5 @@ else
 set mensagem = concat('A cidade ', p_cidade, ' está em outra região');
 end if;
 end //
+
+call verificarregioes ('São Paulo', @msg);
