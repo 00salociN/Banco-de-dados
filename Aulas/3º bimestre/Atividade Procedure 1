@@ -113,3 +113,23 @@ values (concat('cliente ', i), 'Cidade Exemplo', 'EX', 'Região X');
 set i = i + 1;
 end loop loop_inserir;
 end //
+
+call inserirlocalloop();
+
+delimiter //
+create procedure classificarregioes
+in p_id int,
+out classificacao varchar(50)
+)
+begin
+declare reg varchar(50);
+select regiao into from locais where id = p_id;
+case reg
+when 'Sudeste' then set classificacao = 'Região Desenvolvida';
+when 'Norte' then set classificacao = 'Região Amazônica';
+else set classificacao = 'Outra Região';
+end case;
+end //
+
+call classificarregioes(1, @classificacao);
+select @classificacao;
