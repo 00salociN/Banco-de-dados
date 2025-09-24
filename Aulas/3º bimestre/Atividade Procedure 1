@@ -96,3 +96,20 @@ while atual < contador do
 set atual = atual +1;
 end while;
 end //
+
+call contarregioes ('Sudeste', @total);
+select @total
+
+delimiter //
+create procedure inserirlocalloop ()
+begin
+declare i int default 1;
+loop_inserir: loop
+if i > 3 then 
+leave loop_inserir;
+end if;
+insert into locais(nome_cliente, cidade, estado, regiao)
+values (concat('cliente ', i), 'Cidade Exemplo', 'EX', 'Região X');
+set i = i + 1;
+end loop loop_inserir;
+end //
