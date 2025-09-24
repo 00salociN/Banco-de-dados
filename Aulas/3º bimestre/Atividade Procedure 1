@@ -56,4 +56,5 @@ out total int
 )
 begin select count(*) into total
 from locais
-where cidade = p_cidade;
+where cidade = p_cidade
+end;
