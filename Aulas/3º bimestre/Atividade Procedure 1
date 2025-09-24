@@ -92,7 +92,7 @@ declare atual int default 0;
 select count(*) into total from locais where regiao = p_regiao;
 set contador = total;
 set atual = 0;
-while atual < contador 00
+while atual < contador do
 set atual = atual +1;
 end while;
 end //
