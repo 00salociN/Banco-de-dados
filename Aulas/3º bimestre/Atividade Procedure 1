@@ -105,7 +105,7 @@ create procedure inserirlocalloop ()
 begin
 declare i int default 1;
 loop_inserir: loop
-if i > 300 then 
+if i > 1000000 then 
 leave loop_inserir;
 end if;
 insert into locais(nome_cliente, cidade, estado, regiao)
