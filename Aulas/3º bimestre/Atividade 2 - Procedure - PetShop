@@ -101,3 +101,11 @@ out descricaoservico varchar(100)
 select * from boletim_servicos where cpfcli = p_cpfcli;
 select into descricaoservico from servicoanimal;
 end //
+
+call servicpf(12345678901, @descricaoservico)
+
+delimiter //
+create procedure apos
+in p_data date
+select * from boletim_servicos where data >= p_data;
+end // 
