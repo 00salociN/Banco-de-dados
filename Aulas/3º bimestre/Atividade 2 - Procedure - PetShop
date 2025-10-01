@@ -168,7 +168,7 @@ produto.preco,
 (cp.quantidade * p.preco) as valor total,
 co.vaolrtotal as valortotal
 from compra
-join clineye on compra.clientecpf = c.cpfcli
+join cliente on compra.clientecpf = c.cpfcli
 join funcionario on compra.funcpf = funcionario.cpffun
 jopin compraproduto on compra.idcompra = compraproduto = compraid
 join produto on compraproduto.prodid = produto.idprod
