@@ -161,7 +161,7 @@ select
 compra.idcompra,
 compra.data,
 cliente.nome as nomecliente,
-funcionario.nomefun as nomefuncionario
+funcionario.nomefun as nomefuncionario,
 produto.nome as nomeproduto,
 comraproduto.quantidade,
 produto.preco,
