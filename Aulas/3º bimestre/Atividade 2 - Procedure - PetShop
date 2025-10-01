@@ -111,3 +111,68 @@ in p_data date
 begin
 select * from boletim_servicos where data >= p_data;
 end // 
+
+delimiter //
+create procedure Relatorio_Compras_Por_Periodo (
+in p_data date
+)
+begin 
+select 
+cliente.nome,
+funcionario.nomefuncionario,
+produto.nome as nomeproduto,
+
+
+
+
+DELIMITER //
+
+CREATE PROCEDURE Relatorio_Compras_Por_Periodo()
+BEGIN
+    SELECT 
+        co.IDCompra,
+        co.data,
+        c.nome AS nome_cliente,
+        f.nomefun AS nome_funcionario,
+        p.nome AS nome_produto,
+        cp.quantidade,
+        p.preco,
+        (cp.quantidade * p.preco) AS valor_total_produto,
+        co.vaolrtotal AS valor_total_compra
+    FROM 
+        compra co
+    JOIN cliente c ON co.ClienteCPF = c.CPFCli
+    JOIN funcionario f ON co.FunCPF = f.CPFfun
+    JOIN compraproduto cp ON co.IDCompra = cp.compraid
+    JOIN produto p ON cp.prodid = p.IDProd
+    WHERE 
+        co.data BETWEEN '2025-01-01' AND '2025-09-10'
+    ORDER BY 
+        co.data, co.IDCompra, p.nome;
+END //
+
+DELIMITER ;
+
+
+delimiter //
+create procedure relatorio_comprar_por_periodo()
+begin
+select
+compra.idcompra,
+compra.data,
+cliente.nome as nomecliente,
+funcionario.nomefun as nomefuncionario
+produto.nome as nomeproduto,
+comraproduto.quantidade,
+produto.preco,
+(cp.quantidade * p.preco) as valor total,
+co.vaolrtotal as valortotal
+from compra
+join clineye on compra.clientecpf = c.cpfcli
+join funcionario on compra.funcpf = funcionario.cpffun
+jopin compraproduto on compra.idcompra = compraproduto = compraid
+join produto on compraproduto.prodid = produto.idprod
+where compra.data between '2025-01-01' and '2025-09-10'
+order by
+compra.data, compra.idcompra, produto.nome;
+end //
