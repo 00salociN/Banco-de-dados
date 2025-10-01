@@ -94,7 +94,7 @@ servicoanimal.data
 
 
 delimiter //
-create procedure servicpff (
+create procedure servicpf (
 in p_cpfcli char(11),
 out descricaoservico varchar(100)
 )
