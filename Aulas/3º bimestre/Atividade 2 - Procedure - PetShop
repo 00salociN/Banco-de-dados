@@ -98,7 +98,6 @@ create procedure servicpf (
 in p_cpfcli char(11),
 out descricaoservico varchar(100)
 )
-begin
 select * from boletim_servicos where cpfcli = p_cpfcli;
 select into descricaoservico from servicoanimal;
 end //
