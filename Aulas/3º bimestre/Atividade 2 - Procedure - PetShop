@@ -105,7 +105,8 @@ end //
 call servicpf(12345678901, @descricaoservico)
 
 delimiter //
-create procedure apos
+create procedure apos (
 in p_data date
+)
 select * from boletim_servicos where data >= p_data;
 end // 
