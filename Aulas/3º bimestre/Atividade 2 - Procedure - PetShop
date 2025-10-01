@@ -1,0 +1,87 @@
+create table cliente(
+CPFCli char(11) not null unique,
+nome varchar(100) not null,
+constraint PKCliente primary key(CPFCli)
+);
+
+create table animal(
+IDAnimal int auto_increment,
+nomeanimal varchar(100) not null,
+tipo varchar(100) not null,
+ClienteCPF char(11) not null,
+constraint PKAnimal primary key(IDAnimal),
+constraint FKDonoAnimal foreign key (ClienteCPF) references cliente(CPFCli)
+);
+
+create table funcionario(
+CPFfun char(11) not null unique,
+nomefun varchar(100) not null,
+endereco varchar(100) not null,
+telefone varchar(20) not null,
+funcao varchar(100) not null,
+constraint PKFunc primary key(CPFfun)
+);
+
+create table produto (
+IDProd int auto_increment,
+nome varchar(150) not null,
+descricao varchar(150) not null,
+preco decimal(10, 2) not null,
+estoque int not null,
+constraint PKProd primary key(idprod)
+);
+
+create table compra(
+IDCompra int auto_increment,
+ClienteCPF char(11) not null,
+FunCPF char(11) not null,
+vaolrtotal decimal(10,2) not null,
+data date not null,
+constraint PKCompra primary key(IDCompra),
+constraint FKCompraCliCPF foreign key (clientecpf) references cliente(cpfcli),
+constraint FKCompraFunCPF foreign key(funcpf) references funcionario(cpffun)
+);
+
+create table compraproduto (
+compraid int not null,
+prodid int not null,
+constraint PKCompraProduto primary key(compraid, prodid),
+constraint FKProdCompCompra foreign key(compraid) references compra(idcompra),
+constraint FKProdCompProd foreign key (prodid) references produto(idprod)
+);
+
+
+create table servicoanimal(
+IDServico int auto_increment,
+ClienteCPF char(11) not null,
+CPFFun char(11) not null,
+AnimalID int not null,
+descricaoservico varchar(100) not null,
+preco decimal(10,2) not null,
+data date not null,
+constraint PKServico primary key(IDServico),
+constraint FKCPFCli foreign key (ClienteCPF) references cliente(CPFCli),
+constraint FKCPFFun foreign key (CPFFun) references funcionario(CPFFun),
+constraint FKAnimalserv foreign key (AnimalID) references animal(IDAnimal)
+);
+
+create view relatorio_compras as
+select     
+cliente.nome,
+funcionario.nomefun,
+compra.idcompra,
+produto.nome as nomeproduto,
+compra.vaolrtotal as valortotal,
+compra.data
+from compra
+join cliente on compra.clientecpf = cliente.cpfcli
+join funcionario on compra.funcpf = funcionario.cpffun
+join compraproduto on compraproduto.compraid = compra.idcompra
+join produto on compraproduto.prodid = produto.idprod;
+
+
+delimiter //
+create procedure servicpf (
+in p_cpfcli char(11)
+)
+select * from boletim_servicos where cpfcli = p_cpfcli;
