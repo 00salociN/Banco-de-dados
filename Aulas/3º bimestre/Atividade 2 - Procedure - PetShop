@@ -108,5 +108,5 @@ delimiter //
 create procedure apos (
 in p_data date
 )
-select * from boletim_servicos where 2014 >= p_data;
+select * from boletim_servicos where data >= p_data;
 end // 
