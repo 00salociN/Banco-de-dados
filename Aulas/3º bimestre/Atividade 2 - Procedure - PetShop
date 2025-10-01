@@ -163,7 +163,7 @@ compra.data,
 cliente.nome as nomecliente,
 funcionario.nomefun as nomefuncionario,
 produto.nome as nomeproduto,
-comraproduto.quantidade,
+compraproduto.quantidade,
 produto.preco,
 (cp.quantidade * p.preco) as valortotal,
 co.vaolrtotal as valortotal
