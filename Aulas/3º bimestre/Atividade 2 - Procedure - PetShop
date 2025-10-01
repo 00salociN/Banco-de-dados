@@ -108,5 +108,6 @@ delimiter //
 create procedure apos (
 in p_data date
 )
+begin
 select * from boletim_servicos where data >= p_data;
 end // 
