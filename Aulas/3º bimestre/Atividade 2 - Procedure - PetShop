@@ -67,7 +67,7 @@ constraint FKAnimalserv foreign key (AnimalID) references animal(IDAnimal)
 
 create view relatorio_compras as
 select     
-cliente.nome,
+cliente.cpfcli,
 funcionario.nomefun,
 compra.idcompra,
 produto.nome as nomeproduto,
@@ -79,9 +79,23 @@ join funcionario on compra.funcpf = funcionario.cpffun
 join compraproduto on compraproduto.compraid = compra.idcompra
 join produto on compraproduto.prodid = produto.idprod;
 
+create view Boletim_Servicos as
+select
+cliente.cpfcli,
+animal.nomeanimal,
+servicoanimal.descricaoservico,
+funcionario.nomefun,
+servicoanimal.preco,
+servicoanimal.data
+    from servicoanimal
+    join cliente on servicoanimal.Clientecpf = cliente.CPFCli
+    join animal on servicoanimal.AnimalID = animal.idanimal
+    join funcionario on servicoanimal.CPFFun = funcionario.cpffun;
+
 
 delimiter //
 create procedure servicpf (
-in p_cpfcli char(11)
+in p_cpfcli char(11),
+out descricaoservico varchar(100)
 )
 select * from boletim_servicos where cpfcli = p_cpfcli;
