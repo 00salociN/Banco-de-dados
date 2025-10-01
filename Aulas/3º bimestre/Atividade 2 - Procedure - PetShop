@@ -99,5 +99,5 @@ in p_cpfcli char(11),
 out descricaoservico varchar(100)
 )
 select * from boletim_servicos where cpfcli = p_cpfcli;
-select descricaoservico from servicoanimal;
+select into descricaoservico from servicoanimal;
 end //
