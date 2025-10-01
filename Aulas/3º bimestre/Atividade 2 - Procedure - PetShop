@@ -170,7 +170,7 @@ co.vaolrtotal as valortotal
 from compra
 join cliente on compra.clientecpf = compra.cpfcli
 join funcionario on compra.funcpf = funcionario.cpffun
-jopin compraproduto on compra.idcompra = compraproduto = compraid
+join compraproduto on compra.idcompra = compraproduto = compraid
 join produto on compraproduto.prodid = produto.idprod
 where compra.data between '2025-01-01' and '2025-09-10'
 order by
