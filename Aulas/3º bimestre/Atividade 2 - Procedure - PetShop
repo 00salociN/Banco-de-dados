@@ -165,7 +165,7 @@ funcionario.nomefun as nomefuncionario,
 produto.nome as nomeproduto,
 comraproduto.quantidade,
 produto.preco,
-(cp.quantidade * p.preco) as valor total,
+(cp.quantidade * p.preco) as valortotal,
 co.vaolrtotal as valortotal
 from compra
 join cliente on compra.clientecpf = compra.cpfcli
