@@ -113,47 +113,6 @@ begin
 select * from boletim_servicos where data >= p_data;
 end // 
 
-delimiter //
-create procedure Relatorio_Compras_Por_Periodo (
-in p_data date
-)
-begin 
-select 
-cliente.nome,
-funcionario.nomefuncionario,
-produto.nome as nomeproduto,
-
-
-
-
-DELIMITER //
-
-CREATE PROCEDURE Relatorio_Compras_Por_Periodo()
-BEGIN
-    SELECT 
-        co.IDCompra,
-        co.data,
-        c.nome AS nome_cliente,
-        f.nomefun AS nome_funcionario,
-        p.nome AS nome_produto,
-        cp.quantidade,
-        p.preco,
-        (cp.quantidade * p.preco) AS valor_total_produto,
-        co.vaolrtotal AS valor_total_compra
-    FROM 
-        compra co
-    JOIN cliente c ON co.ClienteCPF = c.CPFCli
-    JOIN funcionario f ON co.FunCPF = f.CPFfun
-    JOIN compraproduto cp ON co.IDCompra = cp.compraid
-    JOIN produto p ON cp.prodid = p.IDProd
-    WHERE 
-        co.data BETWEEN '2025-01-01' AND '2025-09-10'
-    ORDER BY 
-        co.data, co.IDCompra, p.nome;
-END //
-
-DELIMITER ;
-
 
 delimiter //
 
