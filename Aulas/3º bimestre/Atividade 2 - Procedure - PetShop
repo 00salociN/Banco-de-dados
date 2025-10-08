@@ -155,24 +155,26 @@ DELIMITER ;
 
 
 delimiter //
+
 create procedure relatorio_comprar_por_periodo()
 begin
-select
-compra.idcompra,
-compra.data,
-cliente.nome as nomecliente,
-funcionario.nomefun as nomefuncionario,
-produto.nome as nomeproduto,
-compraproduto.quantidade,
-produto.preco,
-(compraproduto.quantidade * produto.preco) as valortotal,
-compra.vaolrtotal as valortotal
-from compra
-join cliente on compra.clientecpf = compra.cpfcli
-join funcionario on compra.funcpf = funcionario.cpffun
-join compraproduto on compra.idcompra = compraproduto = compraid
-join produto on compraproduto.prodid = produto.idprod
-where compra.data between '2025-01-01' and '2025-09-10'
-order by
-compra.data, compra.idcompra, produto.nome;
+    select
+        compra.idcompra,
+        compra.data,
+        cliente.nome as nomecliente,
+        funcionario.nomefun as nomefuncionario,
+        produto.nome as nomeproduto,
+        compraproduto.quantidade,
+        produto.preco,
+        (compraproduto.quantidade * produto.preco) as valortotal,
+        compra.valortotal as valortotal_compra
+    from compra
+    join cliente on compra.clientecpf = cliente.cpf
+    join funcionario on compra.funcpf = funcionario.cpffun
+    join compraproduto on compra.idcompra = compraproduto.idcompra
+    join produto on compraproduto.prodid = produto.idprod
+    where compra.data between '2025-01-01' and '2025-09-10'
+    order by
+        compra.data, compra.idcompra, produto.nome;
 end //
+
