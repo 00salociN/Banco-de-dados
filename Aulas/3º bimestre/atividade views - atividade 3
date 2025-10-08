@@ -29,5 +29,6 @@ funcionarios.nomefuncionario,
 projetos.idprojeto,
 projetos.nomeproj
 from projetos
-join departamentos on funcionarios.departamentoid = departamentos.iddepartamento
 join funcionarios on projetos.funid = funcionarios.idfun
+join departamentos on funcionarios.departamentoid = departamentos.iddepartamento;
+
