@@ -36,6 +36,7 @@ delimiter //
 create procedure Relatorio_Equipe_Projeto (
 in idprojeto int,
 in nomeproj varchar(255)
+)
 begin
 select * from equipe_projero where nome = idprojeto or nome = nomeproj
 end //
