@@ -170,7 +170,7 @@ begin
         (compraproduto.quantidade * produto.preco) as valortotal,
         compra.vaolrtotal as valortotal_compra
     from compra
-    join cliente on compra.clientecpf = cliente.cpf
+    join cliente on compra.clientecpf = cliente.cpfcli
     join funcionario on compra.funcpf = funcionario.cpffun
     join compraproduto on compra.idcompra = compraproduto.compraid
     join produto on compraproduto.prodid = produto.idprod
