@@ -45,6 +45,7 @@ constraint FKCompraFunCPF foreign key(funcpf) references funcionario(cpffun)
 create table compraproduto (
 compraid int not null,
 prodid int not null,
+quantidade int,
 constraint PKCompraProduto primary key(compraid, prodid),
 constraint FKProdCompCompra foreign key(compraid) references compra(idcompra),
 constraint FKProdCompProd foreign key (prodid) references produto(idprod)
@@ -167,7 +168,7 @@ begin
         compraproduto.quantidade,
         produto.preco,
         (compraproduto.quantidade * produto.preco) as valortotal,
-        compra.valortotal as valortotal_compra
+        compra.vaolrtotal as valortotal_compra
     from compra
     join cliente on compra.clientecpf = cliente.cpf
     join funcionario on compra.funcpf = funcionario.cpffun
