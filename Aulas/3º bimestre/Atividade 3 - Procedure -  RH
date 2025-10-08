@@ -38,5 +38,5 @@ in p_idprojeto int,
 in p_nomeproj varchar(255)
 )
 begin
-select * from equipe_projero where idprojeto = p_idprojeto or nomeproj = p_nomeproj
+select * from equipe_projeto where idprojeto = p_idprojeto or nomeproj = p_nomeproj
 end //
