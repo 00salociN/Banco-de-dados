@@ -104,9 +104,9 @@ delimiter //
 create procedure proc_alunosituacao ()
 begin 
 select
-alunos.nome,
+alunos.nomealun,
 disciplinas.nomedisc,
-historico_escolar.media as nota,
+historico_escolar.media as nota
 from historico_escolar
 join alunos on historico_escolar.fkraluno = alunos.ra
 join disciplinas on historico_escolar.iddisc = disciplinas.discid
