@@ -99,3 +99,14 @@ join professor_disciplina on professores.profid = professor_disciplina.fkprofess
 join disciplinas on professor_disciplina.fkdisc = disciplinas.discid
 where professor_curso.fkcurso = idcurso;
 end //
+
+delimiter //
+begin 
+alunos.nome,
+disciplinas.nomedisc,
+historico_escolar.media as nota
+from historico escolar
+join alunos on historico_escolar.fkraluno = alunos.ra
+join disciplinas on historico_escolar.iddisc = disciplinas.discid
+where historico_escolar.faltas < 5;
+end //
