@@ -107,7 +107,7 @@ select
 alunos.nome,
 disciplinas.nomedisc,
 historico_escolar.media as nota,
-from historico escolar
+from historico_escolar
 join alunos on historico_escolar.fkraluno = alunos.ra
 join disciplinas on historico_escolar.iddisc = disciplinas.discid
 where historico_escolar.faltas < 5;
