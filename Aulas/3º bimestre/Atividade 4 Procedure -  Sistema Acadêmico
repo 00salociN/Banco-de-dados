@@ -102,6 +102,7 @@ end //
 
 delimiter //
 begin 
+select
 alunos.nome,
 disciplinas.nomedisc,
 historico_escolar.media as nota,
