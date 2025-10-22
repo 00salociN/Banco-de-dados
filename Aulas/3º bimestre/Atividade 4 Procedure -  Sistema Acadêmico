@@ -88,6 +88,7 @@ create procedure Proc_ProfessoresCurso (
 in idcurso int
 )
 begin 
+select
 professores.nomeprof,
 professores.gmail,
 disciplinas.nomedisc
