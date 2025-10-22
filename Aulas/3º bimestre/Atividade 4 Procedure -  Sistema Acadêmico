@@ -80,7 +80,8 @@ semestre,
 media,
 faltas,
 situacao
-from historico_escolar;
+from historico_escolar
+where historico_escolar.fkraluno = ra;
 end //
 
 delimiter //
