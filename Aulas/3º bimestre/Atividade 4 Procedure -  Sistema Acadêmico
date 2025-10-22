@@ -82,3 +82,16 @@ faltas,
 situacao
 from historico_escolar;
 end //
+
+delimiter //
+create procedure Proc_ProfessoresCurso (
+in idcurso int
+)
+begin 
+professores.nome,
+professores.gmail,
+disciplinas.nomedisc
+from professor_disciplina
+join professores on professor_disciplina.fkprofessor = professores.profid
+join disciplinas on professor_disciplina.fkdisc = disciplinas.discid;
+end //
