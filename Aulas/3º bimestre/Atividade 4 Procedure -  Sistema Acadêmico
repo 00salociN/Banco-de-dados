@@ -101,6 +101,7 @@ where professor_curso.fkcurso = idcurso;
 end //
 
 delimiter //
+create procedure proc_alunosituacao ()
 begin 
 select
 alunos.nome,
