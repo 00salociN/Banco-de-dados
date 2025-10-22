@@ -128,4 +128,15 @@ join professor_disciplina on disciplinas.discid = professor_disciplina.fkdisc
 join professores on professor_disciplina.fkprofessor = professores.profid
 where professores.nomeprof = nomeprof;
 end //
-join professores on professor_disciplina.fkprofessor = professores.profid
+
+delimiter //
+create procedure proc_semaluno (
+in ano date
+)
+begin
+select
+disciplinas.nomedisc,
+turmas.qntd_alunos
+from disciplinas
+where turmas.qntd_alunos = 0
+end //
