@@ -94,5 +94,7 @@ professores.gmail,
 disciplinas.nomedisc
 from professor_disciplina
 join professores on professor_disciplina.fkprofessor = professores.profid
-join disciplinas on professor_disciplina.fkdisc = disciplinas.discid;
+join professor_disciplina on professores.profid = professor_disciplina.fkprofessor
+join disciplinas on professor_disciplina.fkdisc = disciplinas.discid
+where professor_curso.fkcurso = idcurso;
 end //
