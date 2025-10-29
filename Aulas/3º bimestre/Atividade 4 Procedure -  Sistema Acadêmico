@@ -85,9 +85,9 @@ join alunos on historico_escolar.fkraluno = alunos.ra;
 
 delimiter //
 create procedure Proc_BoletimAluno (
-in matricula varchar(255)
+in p_matricula varchar(255)
 ) begin
-select * from boletim where matricula = matricula;
+select * from boletim where p_matricula = matricula;
 end //
 
 delimiter //
