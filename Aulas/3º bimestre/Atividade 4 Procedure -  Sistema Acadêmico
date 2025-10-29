@@ -162,6 +162,8 @@ select
 turmas.idturma,
 turmas.serie,
 turmas.ano,
-turmas.qntd_alunos = '0'
+turmas.qntd_alunos
+from turmas
+where turmas.qntd_alunos = '0'
 and turmas.ano = p_ano;
 end //
