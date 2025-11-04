@@ -135,24 +135,6 @@ join professores on professor_disciplina.fkprofessor = professores.profid
 where professores.nomeprof = nomeprof;
 end //
 
-DELIMITER //
-
-CREATE PROCEDURE proc_semaluno (
-    IN ano CHAR(4)
-)
-BEGIN
-    SELECT 
-        turmas.idturma,
-        turmas.serie,
-        turmas.ano,
-        turmas.qntd_alunos
-    FROM turmas
-    WHERE turmas.qntd_alunos = '0'
-      AND turmas.ano = ano;
-END //
-
-DELIMITER ;
-
 delimiter //
 create procedure proc_semaluno (
 in p_ano char(4)
