@@ -16,5 +16,5 @@ id_venda int,
 id_produto int,
 quantidade int not null,
 foreign key (id_venda) references vendas (id_venda),
-foreign key (id_produto) references vendas (id_produto)
+foreign key (id_produto) references produtos (id_produto)
 );
