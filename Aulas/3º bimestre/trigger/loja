@@ -18,3 +18,12 @@ quantidade int not null,
 foreign key (id_venda) references vendas (id_venda),
 foreign key (id_produto) references produtos (id_produto)
 );
+
+create table auditoria (
+id_auditoria int primary key auto_increment,
+tabela varchar(50) not null,
+operacao varchar(50),
+mensagem text,
+descricao text,
+data_registro timestamp default current_timestamp
+);
