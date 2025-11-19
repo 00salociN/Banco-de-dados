@@ -35,8 +35,8 @@ insert into produtos (nome_produto, preco, estoque) values
 
 delimiter //
 create trigger trg_auditoria_preco
-after update on produtoss
-for each now
+after update on produtos
+for each row
 begin
 if new.preco <> old.preco then
 insert into auditoria (
@@ -51,6 +51,6 @@ concat ('Produto ID: ', new.id_produto,
 ' para R$', new.preco)
 );
 end if;
-end //
+END //
 
 delimiter ;
