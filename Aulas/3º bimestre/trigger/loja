@@ -32,3 +32,25 @@ insert into produtos (nome_produto, preco, estoque) values
 ('Notebook', 3500.00, 10),
 ('Smartphone', 2000.00, 15),
 ('Tablet', 1500.00, 20);
+
+delimiter //
+create trigger trg_auditoria_preco
+after update on produtoss
+for each now
+begin
+if new.preco <> old.preco then
+insert into auditoria (
+tabela,
+operacao,
+mensagem
+) values (
+'produtos',
+'alteracao_preco',
+concat ('Produto ID: ', new.id_produto,
+' teve o preço alterado de R$', old.preco,
+' para R$', new.preco)
+);
+end if;
+end //
+
+delimiter ;
