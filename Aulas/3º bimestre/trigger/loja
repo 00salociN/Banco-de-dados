@@ -27,3 +27,8 @@ mensagem text,
 descricao text,
 data_registro timestamp default current_timestamp
 );
+
+insert into produtos (nome_produto, preco, estoque) values 
+('Notebook', 3500.00, 10),
+('Smartphone', 2000.00, 15),
+('Tablet', 1500.00, 20);
