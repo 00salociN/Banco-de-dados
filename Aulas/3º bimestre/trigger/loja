@@ -2,4 +2,5 @@ create table produtos (
 id_produto int primary key auto_increment,
 nome_produto varchar(100) not null,
 preco decimal(10,2) not null,
-estoque int not null default 0;
+estoque int not null default 0
+);
