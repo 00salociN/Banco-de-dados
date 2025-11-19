@@ -54,3 +54,17 @@ end if;
 END //
 
 delimiter ;
+
+select 'antes da alteracao' as status;
+
+update produtos set preco = 3000.00 where id_produto = 1;
+
+select * from produtos;
+
+select 'depois da alteração' as status;
+
+select * from produtos;
+
+select 'registros da auditoria' as status;
+
+select * from auditoria;s
