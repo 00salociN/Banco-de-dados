@@ -4,3 +4,17 @@ nome_produto varchar(100) not null,
 preco decimal(10,2) not null,
 estoque int not null default 0
 );
+
+create table vendas (
+id_venda int primary key auto_increment,
+data_venda datetime default current_timestamp
+);
+
+create table itens_vendas (
+id_item int primary key auto_increment,
+id_venda int,
+id_produto int,
+quantidade int not null,
+foreign key (id_venda) references vendas (id_venda),
+foreign key (id_produto) references vendas (id_produto)
+);
