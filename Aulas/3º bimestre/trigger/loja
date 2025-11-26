@@ -99,3 +99,18 @@ insert into itens_vendas (id_venda, id_produto, quantidade) valuues(1, 1, 2);
 select 'auditoria final' as status;
 select *  from auditoria
 order by data_registro desc;
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                                        exercicios
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+delimiter //
+create trigger impedir_remocao
+before delete on produtos
+for each row
+begin 
+select estoque from produtos
+where id_produto = old.id_produto;
+if estoque > 0 then
+signal sqlstate '4500' set message_text = 'Não pode deletar este item, pois ainda está no estoque'
+end if;
+END //
