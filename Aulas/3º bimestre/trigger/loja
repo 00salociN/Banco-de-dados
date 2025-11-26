@@ -92,7 +92,10 @@ END //
 
 delimiter ;
 
-
 insert into vendas (data_venda) values (now());
 
 insert into itens_vendas (id_venda, id_produto, quantidade) valuues(1, 1, 2);
+
+select 'auditoria final' as status;
+select *  from auditoria
+order by data_registro desc;
