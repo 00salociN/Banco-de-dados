@@ -91,3 +91,8 @@ concat ('Venda ID', new.id_venda,
 END //
 
 delimiter ;
+
+
+insert into vendas (data_venda) values (now());
+
+insert into itens_vendas (id_venda, id_produto, quantidade) valuues(1, 1, 2);
