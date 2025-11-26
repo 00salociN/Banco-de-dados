@@ -84,7 +84,7 @@ mensagem
 ) values (
 'itens_venda',
 'nova_venda',
-concat ('Venda ID', new.id_venda,
+concat ('Venda ID', new.id_venda,ss
 ' - Produto ID: ', new.id_produto,
 ' - Quantidade: ', new.quantidade)
 );
@@ -125,6 +125,7 @@ END //
 alter table produtos add column ultima_modificacao timestamp
 
 delimiter //
+create trigger ultima_modifi
 after update on produtos
 for each row
 begin
