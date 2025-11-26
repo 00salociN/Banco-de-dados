@@ -84,7 +84,7 @@ mensagem
 ) values (
 'itens_venda',
 'nova_venda',
-concat ('Venda ID'), new.id_venda,
+concat ('Venda ID', new.id_venda,
 ' - Produto ID: ', new.id_produto,
 ' - Quantidade: ', new.quantidade)
 );
