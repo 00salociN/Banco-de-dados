@@ -126,7 +126,7 @@ alter table produtos add column ultima_modificacao timestamp
 
 delimiter //
 create trigger ultima_modifi
-after update on produtos
+before update on produtos
 for each row
 begin
 
