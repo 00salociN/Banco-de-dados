@@ -1,4 +1,4 @@
-create table produtos (
+ create table produtos (
 id_produto int primary key auto_increment,
 nome_produto varchar(100) not null,
 preco decimal(10,2) not null,
@@ -103,15 +103,33 @@ order by data_registro desc;
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                                                                         exercicios
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1-
 delimiter //
+
 create trigger impedir_remocao
 before delete on produtos
 for each row
 begin 
+
 declare v_estoque int;
 select estoque into v_estoque from produtos
+
 where id_produto = old.id_produto;
 if v_estoque > 0 then
 signal sqlstate '45000' set message_text = 'Não pode deletar este item, pois ainda está no estoque';
+
 end if;
+END //
+--------------------------------------------
+2- 
+alter table produtos add column ultima_modificacao timestamp
+
+delimiter //
+after update on produtos
+for each row
+begin
+
+set new.ultima_modificacao = now();
+
+
 END //
