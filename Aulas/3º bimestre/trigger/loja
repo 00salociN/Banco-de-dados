@@ -112,6 +112,6 @@ declare v_estoque int;
 select estoque into v_estoque from produtos
 where id_produto = old.id_produto;
 if v_estoque > 0 then
-signal sqlstate '4500' set message_text = 'Não pode deletar este item, pois ainda está no estoque'
+signal sqlstate '45000' set message_text = 'Não pode deletar este item, pois ainda está no estoque'
 end if;
 END //
