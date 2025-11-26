@@ -71,7 +71,7 @@ select * from auditoria order by data_registro desc;
 
 delimiter //
 create trigger trg_auditoria_venda
-after insert on itens_venda
+after insert on itens_vendas
 for each row
 begin
 update produtos
