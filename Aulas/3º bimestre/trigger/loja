@@ -68,3 +68,26 @@ select * from produtos;
 select 'registros da auditoria' as status;
 
 select * from auditoria order by data_registro desc;
+
+delimiter //
+create trigger trg_auditoria_venda
+after insert on itens_venda
+for each row
+begin
+update produtos
+set estoque = estoque - new.quantidade
+where id_produto = new.id_produto;
+insert into auditoria (
+tabela, 
+operacao,
+mensagem
+) values (
+'itens_venda',
+'nova_venda',
+concat ('Venda ID'), new.id_venda,
+' - Produto ID: ', new.id_produto,
+' - Quantidade: ', new.quantidade)
+);
+END //
+
+delimiter ;
