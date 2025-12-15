@@ -134,3 +134,29 @@ set new.ultima_modificacao = now();
 
 
 END //
+
+---------------------------------------------
+3-
+
+create trigger historico_precos_trg
+before update on produtos
+for each row
+begin
+if old.preco <> new.preco then
+insert into historico_precos (
+id_produto,
+preco_antigo,
+preco_novo,
+data_alteracao
+)
+values (
+old.id_produto,
+old.preco,
+ new.preco,
+now()
+);
+end if;
+
+end //
+
+delimiter ;
